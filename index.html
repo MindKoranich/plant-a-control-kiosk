@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PLANT A CONTROL - Tomato Cultivation Kiosk</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for crisp tech interface -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Custom Configuration -->
+<script src="js/tailwind-config-home.js"></script>
+<!-- Custom Visual Styling Stylesheet -->
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body class="font-sans text-white">
+<svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<!-- BEGIN: Kiosk Display Container (800x1280) -->
+<main class="kiosk-viewport flex flex-col justify-between box-border" data-purpose="main-kiosk-display">
+<!-- BEGIN: Top Header Bar -->
+<header class="w-full bg-[#111b22] border border-[#1c323e] px-7 py-3 rounded-2xl flex items-center justify-between shadow-md" data-purpose="system-header">
+<div class="flex items-center space-x-3">
+<h1 class="text-2xl font-extrabold tracking-wide text-white">PLANT A CONTROL</h1>
+</div>
+<div class="flex items-center space-x-3">
+<a href="admin.html" class="admin-badge-btn" title="เข้าสู่ระบบผู้ดูแลระบบ (Admin Settings)">
+<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+<span>Admin</span>
+</a>
+<div class="header-status-pill">
+<span class="header-status-dot"></span>
+<span class="header-status-text">OK</span>
+</div>
+<span class="text-neutral-500 font-light text-xl">|</span>
+<div class="header-time" id="current-time">17:45</div>
+</div>
+</header>
+<!-- END: Top Header Bar -->
+<!-- BEGIN: Lifecycle Stage Tracker -->
+<section class="glass-card px-8 py-4 mt-2" data-purpose="lifecycle-tracker" role="tablist" aria-label="ระยะการเจริญเติบโต">
+<div class="relative flex items-center justify-between px-2">
+<!-- Base track -->
+<div class="absolute top-1/2 left-8 right-8 -translate-y-4 h-1 bg-[#1c2930] -z-0"></div>
+<!-- Active connecting progress line -->
+<div class="absolute top-1/2 left-8 w-[36%] -translate-y-4 h-1 bg-gradient-to-r from-emerald-600 to-[#2ef387] rounded-full -z-0 transition-all duration-500" id="stage-progress-bar" style="width: 36%;"></div>
+<!-- Stage 1: เพาะกล้า -->
+<button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-1" role="tab" aria-selected="false" tabindex="0" onclick="selectStage(1)">
+<div class="w-13 h-13 rounded-full bg-[#122227] border-2 border-emerald-500/70 flex items-center justify-center text-emerald-400 mb-2 shadow-sm transition-all group-hover:scale-105" id="stage-icon-1"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div>
+<span class="text-sm text-neutral-300 font-medium whitespace-nowrap transition-colors" id="stage-label-1">เพาะกล้า</span>
+</button>
+<!-- Stage 2: ต้นกล้า -->
+<button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-2" role="tab" aria-selected="true" tabindex="0" onclick="selectStage(2)">
+<div class="w-14 h-14 rounded-full bg-emerald-400 border-2 border-emerald-300 flex items-center justify-center text-emerald-950 font-bold mb-1.5 scale-105 transition-all shadow-md" id="stage-icon-2"><svg class="w-8 h-8 text-neutral-950" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg></div>
+<span class="text-sm text-white font-extrabold tracking-wide whitespace-nowrap transition-colors" id="stage-label-2">ต้นกล้า</span>
+</button>
+<!-- Stage 3: เติบโต -->
+<button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-3" role="tab" aria-selected="false" tabindex="0" onclick="selectStage(3)">
+<div class="w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105" id="stage-icon-3"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<span class="text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors" id="stage-label-3">เติบโต</span>
+</button>
+<!-- Stage 4: เก็บเกี่ยว -->
+<button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-4" role="tab" aria-selected="false" tabindex="0" onclick="selectStage(4)">
+<div class="w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105" id="stage-icon-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<span class="text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors" id="stage-label-4">เก็บเกี่ยว</span>
+</button>
+</div>
+</section>
+<!-- END: Lifecycle Stage Tracker -->
+<!-- BEGIN: Specimen Center & Telemetry Columns -->
+<section class="grid grid-cols-12 gap-4 my-2 h-[440px] items-stretch" data-purpose="specimen-monitoring-zone">
+<div class="col-span-3 flex flex-col justify-between space-y-3.5">
+<div class="glass-card p-5 flex-1 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2ef387]"></span>
+<span class="text-xs font-bold text-neutral-300 tracking-wider uppercase">สถานะปลูก</span>
+</div>
+<span class="text-xs font-bold text-emerald-950 bg-[#2ef387] px-2.5 py-0.5 rounded-full">รอบที่ 1</span>
+</div>
+<div class="my-2">
+<div class="flex items-baseline space-x-1">
+<span class="text-xs text-neutral-400 font-bold uppercase tracking-wider">DAY</span>
+<span class="text-4xl font-extrabold text-white tracking-tight" id="telemetry-day">32</span>
+<span class="text-sm text-neutral-300 font-semibold">/ 110</span>
+</div>
+<div class="flex items-center justify-between text-xs mt-1">
+<span class="text-[#2ef387] font-semibold" id="telemetry-stage-name">ระยะที่ 2: ต้นกล้า</span>
+<span class="text-xs font-bold text-[#2ef387]" id="telemetry-stage-pct">71%</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
+<div class="bg-[#2ef387] h-full w-[71%] rounded-full transition-all duration-500" id="telemetry-progress-fill" style="width: 71%;"></div>
+</div>
+<div class="flex justify-between text-xs text-neutral-300">
+<span>ความคืบหน้ารวม</span>
+<span class="text-neutral-200 font-semibold" id="telemetry-remaining">เหลือ 78 วัน</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-5 h-44 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-neutral-300 tracking-wider">CROP AGE</span>
+<span class="text-xs text-neutral-300 font-medium" id="telemetry-crop-stage-label">ระยะต้นกล้า</span>
+</div>
+<div class="flex items-baseline space-x-2 my-1">
+<span class="text-4xl font-extrabold text-white tracking-tight" id="telemetry-crop-age-days">10</span>
+<span class="text-neutral-300 text-base font-semibold">days</span>
+</div>
+<div class="pt-2 border-t border-[#1c2930] flex items-center justify-between text-xs text-emerald-400 font-mono font-bold">
+<span id="telemetry-ec">EC: 1.76</span>
+<span class="text-neutral-500">|</span>
+<span id="telemetry-ph">pH: 6.2</span>
+</div>
+</div>
+</div>
+<div class="col-span-6 relative flex flex-col items-center justify-end pb-3 overflow-hidden">
+<div class="absolute top-1/4 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative w-64 h-64 z-10 flex flex-col items-center justify-end transition-all duration-500" id="specimen-plant-container" data-stage="2">
+<div class="bg-gradient-to-t from-emerald-700 via-emerald-600 to-emerald-500 rounded-full relative transition-all duration-500" id="plant-stem" style="width: 12px; height: 16rem;">
+<div class="plant-leaf absolute -left-12 top-4 w-14 h-8 bg-emerald-500 rounded-[60px_0_60px_0] -rotate-12 border-l border-emerald-300 shadow-md" id="plant-leaf-1"></div>
+<div class="plant-leaf absolute -right-14 top-8 w-16 h-9 bg-emerald-600 rounded-[0_60px_0_60px] rotate-12 border-r border-emerald-400 shadow-md" id="plant-leaf-2"></div>
+<div class="plant-leaf absolute -right-4 top-14 w-8 h-8 rounded-full bg-gradient-to-tr from-rose-700 via-red-500 to-rose-300 shadow-md border border-red-400 transition-all duration-500" id="plant-fruit-1" style="opacity: 1; transform: scale(1);"><span class="absolute top-1.5 left-2 w-1.5 h-1.5 bg-white/70 rounded-full"></span></div>
+<div class="plant-leaf absolute -left-16 top-24 w-18 h-10 bg-emerald-500 rounded-[70px_0_70px_0] -rotate-20 border-l border-emerald-300 shadow-md" id="plant-leaf-3"></div>
+<div class="plant-leaf absolute -left-10 top-28 w-11 h-11 rounded-full bg-gradient-to-tr from-rose-700 via-red-500 to-rose-300 shadow-lg border border-red-400 z-20 transition-all duration-500" id="plant-fruit-2" style="opacity: 1; transform: scale(1);"><span class="absolute top-2 left-2.5 w-2.5 h-2.5 bg-white/80 rounded-full"></span></div>
+<div class="plant-leaf absolute -left-3 top-24 w-13 h-13 rounded-full bg-gradient-to-tr from-rose-800 via-red-600 to-rose-300 shadow-lg border border-red-400 z-20 transition-all duration-500" id="plant-fruit-3" style="opacity: 1; transform: scale(1);"><span class="absolute top-2.5 left-3 w-3 h-3 bg-white/85 rounded-full"></span></div>
+<div class="plant-leaf absolute -right-14 top-28 w-16 h-10 bg-emerald-600 rounded-[0_70px_0_70px] rotate-24 border-r border-emerald-400 shadow-md" id="plant-leaf-4"></div>
+<div class="plant-leaf absolute -right-2 top-40 w-7 h-7 rounded-full bg-gradient-to-tr from-rose-700 via-red-500 to-rose-300 shadow-md border border-red-400 z-10 transition-all duration-500" id="plant-fruit-4" style="opacity: 1; transform: scale(1);"><span class="absolute top-1 left-1.5 w-1 h-1 bg-white/70 rounded-full"></span></div>
+</div>
+</div>
+<div class="specimen-jar w-56 h-36 relative -mt-6 z-20 flex flex-col justify-end p-3">
+<div class="absolute inset-x-2 top-2 h-1 bg-white/20 rounded-full"></div>
+<div class="w-full h-20 bg-gradient-to-b from-cyan-500/15 via-emerald-600/20 to-emerald-900/35 rounded-b-xl relative overflow-hidden border-t border-cyan-400/30">
+<div class="w-2 h-2 rounded-full bg-cyan-200/50 absolute bottom-4 left-6"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-200/60 absolute bottom-8 right-12"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-white/40 absolute bottom-2 left-1/2"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50 absolute bottom-11 left-1/3"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-14 border-b-2 border-l-2 border-r-2 border-emerald-400/40 rounded-full opacity-40"></div>
+</div>
+</div>
+</div>
+<div class="col-span-3 flex flex-col justify-between space-y-3.5">
+<div class="glass-card p-4 flex-1 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-neutral-300 tracking-wider">TEMP</span>
+<span class="text-xs text-emerald-400 font-mono font-semibold" id="telemetry-temp-status">● NORMAL</span>
+</div>
+<div class="my-1">
+<div class="text-3xl font-extrabold text-white tracking-tight"><span id="telemetry-temp-val">22.5</span><span class="text-lg font-semibold text-neutral-300 ml-1">°C</span></div>
+<div class="text-xs text-neutral-300 font-medium mt-0.5" id="telemetry-temp-target">Target: 22-25°C</div>
+</div>
+<div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
+<div class="bg-[#2ef387] h-full w-[68%] rounded-full transition-all duration-500" id="telemetry-temp-bar"></div>
+</div>
+</div>
+<div class="glass-card p-4 flex-1 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-neutral-300 tracking-wider">HUMIDITY</span>
+<span class="text-xs text-cyan-400 font-mono font-semibold" id="telemetry-rh-status">● OPTIMAL</span>
+</div>
+<div class="my-1">
+<div class="text-3xl font-extrabold text-[#2ef387] tracking-tight"><span id="telemetry-rh-val">65</span><span class="text-lg font-semibold text-neutral-300 ml-1">%</span></div>
+<div class="text-xs text-neutral-300 font-medium mt-0.5" id="telemetry-rh-target">RH Range: 60-70%</div>
+</div>
+<div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full w-[65%] rounded-full transition-all duration-500" id="telemetry-rh-bar"></div>
+</div>
+</div>
+<div class="glass-card p-4 flex-1 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-neutral-300 tracking-wider">VPD</span>
+<span class="text-xs text-emerald-400 font-mono font-semibold" id="telemetry-vpd-status">● IDEAL</span>
+</div>
+<div class="my-1">
+<div class="text-3xl font-extrabold text-white tracking-tight"><span id="telemetry-vpd-val">0.95</span><span class="text-sm font-semibold text-neutral-300 ml-1">kPa</span></div>
+<div class="text-xs text-neutral-300 font-medium mt-0.5" id="telemetry-vpd-target">Transpiration: Stable</div>
+</div>
+<div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
+<div class="bg-[#2ef387] h-full w-[55%] rounded-full transition-all duration-500" id="telemetry-vpd-bar"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Specimen Center & Telemetry Columns -->
+<!-- BEGIN: Middle Zone TODO LIST Card -->
+<section class="glass-card p-6 my-2" data-purpose="tasks-card">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center space-x-3">
+<span class="w-2.5 h-7 bg-[#2ef387] rounded-full inline-block"></span>
+<div>
+<div class="flex items-center space-x-2.5">
+<h2 class="text-xl font-bold text-white tracking-wide">TO DO LIST ประจำวัน</h2>
+<span class="text-xs font-bold text-emerald-950 bg-[#2ef387] px-2.5 py-0.5 rounded-full font-sans transition-all" id="tasks-stage-badge">ระยะที่ 2: ต้นกล้า</span>
+</div>
+<div class="text-xs text-neutral-300 font-medium mt-1 flex items-center space-x-2" id="tasks-day-subtitle">
+<span class="text-[#2ef387] font-semibold" id="tasks-day-text">วันที่ 32</span>
+<span class="text-neutral-500">/</span>
+<span class="text-neutral-300">110 วันรวม</span>
+<span class="text-neutral-500">•</span>
+<span class="text-neutral-300" id="tasks-range-text">ช่วงระยะวันที่ 26–50 (วันที่ 7 ของระยะนี้)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<a class="text-sm font-semibold text-neutral-200 bg-[#162128] hover:bg-[#1c2930] px-4 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html" id="equipment-link">อุปกรณ์</a>
+</div>
+</div>
+<div class="space-y-3.5 pl-1" id="tasks-list-items">
+<div class="task-item-card flex items-center justify-between p-3.5 rounded-xl border bg-[#12221c]/70 border-emerald-500/40 is-completed" data-task-id="stage2_task0">
+<div class="flex items-center space-x-3 flex-1 min-w-0">
+<button type="button" role="checkbox" aria-checked="true" tabindex="0" class="task-check-btn is-checked" onclick="handleTaskToggle('stage2_task0', true, event)" aria-label="ทำเครื่องหมายว่ายังไม่เสร็จ" title="คลิกเพื่อยกเลิก">
+<span class="check-dot"></span>
+</button>
+<a href="info.html?stage=2" class="task-text-link" title="คลิกเพื่อดูขั้นตอนปฏิบัติและข้อควรระวังในหน้าข้อมูลเพิ่มเติม">
+<span class="px-2.5 py-1 rounded-md border text-xs font-mono font-bold tracking-wider border-emerald-500/70 text-emerald-400 bg-[#122227] flex-shrink-0">08:00 น.</span>
+<span class="task-text text-base font-medium text-neutral-100 tracking-normal font-sans truncate transition-colors">ตรวจวัดและปรับค่า EC 1.8–2.0 / pH 6.0</span>
+</a>
+</div>
+<a href="info.html?stage=2" class="text-xs text-neutral-300 hover:text-emerald-300 font-medium pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors" title="ดูรายละเอียดขั้นตอน"><span>วิธีทำ</span><span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</section>
+<!-- END: Middle Zone TODO LIST Card -->
+<!-- BEGIN: Bottom Hardware Kiosk Control Bar -->
+<nav class="w-full bg-[#111b22] border border-[#1c323e] rounded-2xl p-2.5 my-1 grid grid-cols-2 gap-4 shadow-xl z-20" data-purpose="bottom-navigation-bar">
+<a class="flex items-center justify-center space-x-3 py-4 px-6 rounded-xl bg-[#1c2930] border-2 border-emerald-400 text-white transition-all active:scale-95 cursor-pointer" href="index.html" id="nav-home-btn">
+<svg class="w-7 h-7 text-[#2ef387] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+<span class="text-base font-bold tracking-wide text-white">หน้าหลัก</span>
+</a>
+<a class="flex items-center justify-center space-x-3 py-4 px-6 rounded-xl bg-[#162128] hover:bg-[#1c2930] text-neutral-300 border border-[#23323b] hover:border-neutral-500 transition-all active:scale-95 cursor-pointer" href="info.html" id="nav-more-btn">
+<svg class="w-7 h-7 text-neutral-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
+<span class="text-base font-semibold tracking-wide">ข้อมูลเพิ่มเติม</span>
+</a>
+</nav>
+<!-- END: Bottom Hardware Kiosk Control Bar -->
+<div class="hidden" data-stage="2" id="kiosk-interactive-engine"></div>
+</main>
+<!-- END: Kiosk Display Container -->
+<!-- BEGIN: Interactive Logic Script -->
+<script src="js/home.js"></script>
+<!-- END: Interactive Logic Script -->
+
+</body></html>

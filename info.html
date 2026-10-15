@@ -1,0 +1,673 @@
+<!DOCTYPE html><html lang="th" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport">
+<title>PLANT A CONTROL – ข้อมูลเพิ่มเติม</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Prompt:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="js/tailwind-config-info.js"></script>
+<link rel="stylesheet" href="css/info.css">
+</head>
+<body>
+<div class="kiosk-canvas select-none">
+<!-- TOP KIOSK HEADER BAR -->
+<header class="info-system-header" data-purpose="system-header">
+  <h1>PLANT A CONTROL</h1>
+  <div class="info-system-status">
+    <a href="admin.html" class="admin-link-badge" title="เข้าสู่ระบบผู้ดูแลระบบ (Admin Settings)">
+      <svg class="w-4 h-4 text-bio-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+      <span>Admin</span>
+    </a>
+    <div class="info-status-pill">
+      <span class="info-status-dot"></span>
+      <span>OK</span>
+    </div>
+    <span class="info-status-divider">|</span>
+    <time id="info-current-time">10:48</time>
+  </div>
+</header>
+<!-- STAGE SELECTOR TABS -->
+<section class="px-7 pt-4 pb-2 z-10">
+  <div class="text-[15px] font-bold text-bio-cyan uppercase tracking-wider mb-2.5 flex items-center justify-between font-thai">
+    <span class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-bio-cyan"></span>
+      GROWTH STAGES
+    </span>
+    <span class="font-mono text-bio-muted text-sm bg-bio-card px-3.5 py-1 rounded-full border border-bio-line font-bold">รอบปลูก 110 วัน</span>
+  </div>
+
+  <div class="relative flex items-center justify-between px-2" id="stageTabs" role="tablist" aria-label="เลือกระยะการเจริญเติบโต">
+    <div class="absolute left-10 right-10 top-1/2 h-1 -translate-y-1/2 rounded-full bg-bio-line/80"></div>
+    <div class="absolute left-10 top-1/2 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-bio-accent to-bio-cyan transition-all duration-300" id="stageProgressTrack" style="width: 28%;"></div>
+
+    <button class="stage-tab glass-panel-active" id="stageBtn-1" role="tab" aria-selected="true" tabindex="0" onclick="switchStage(1)">
+      <div class="stage-node stage-node-active">
+        <span class="stage-node-mark">✓</span>
+      </div>
+      <div class="stage-text-group">
+        <span class="stage-name">เพาะกล้า</span>
+        <span class="stage-days">1–25 วัน</span>
+      </div>
+      <span class="stage-state">กำลังทำ</span>
+    </button>
+
+    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-2" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(2)">
+      <div class="stage-node">
+        <span class="stage-node-mark">•</span>
+      </div>
+      <div class="stage-text-group">
+        <span class="stage-name">ต้นกล้า</span>
+        <span class="stage-days">26–50 วัน</span>
+      </div>
+      <span class="stage-state">รอถัดไป</span>
+    </button>
+
+    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-3" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(3)">
+      <div class="stage-node">
+        <span class="stage-node-mark">＋</span>
+      </div>
+      <div class="stage-text-group">
+        <span class="stage-name">เติบโต</span>
+        <span class="stage-days">51–75 วัน</span>
+      </div>
+      <span class="stage-state">รอถัดไป</span>
+    </button>
+
+    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-4" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(4)">
+      <div class="stage-node">
+        <span class="stage-node-mark">◫</span>
+      </div>
+      <div class="stage-text-group">
+        <span class="stage-name">เก็บเกี่ยว</span>
+        <span class="stage-days">76–110 วัน</span>
+      </div>
+      <span class="stage-state">ปลายทาง</span>
+    </button>
+  </div>
+</section>
+<!-- CONTENT VIEW SUB-TABS -->
+<section class="px-7 py-2.5 z-10">
+<div class="flex items-center gap-2 p-1.5 bg-bio-surface/90 rounded-2xl border border-bio-line/80 backdrop-blur-md" role="tablist" aria-label="หมวดหมู่ข้อมูล">
+<button class="flex-1 h-[48px] px-2 rounded-xl font-thai font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-bio-card2 text-bio-accent border border-bio-accent/50" id="subTab-chart" role="tab" aria-selected="true" tabindex="0" onclick="switchSubTab('chart')">
+<span class="text-lg">📊</span>
+<span class="tracking-tight text-[15px] font-bold">กราฟ &amp; เป้าหมาย</span>
+</button>
+<button class="flex-1 h-[48px] px-2 rounded-xl font-thai font-bold text-[15px] flex items-center justify-center gap-2 transition-all text-bio-muted hover:text-white border border-transparent" id="subTab-todo" role="tab" aria-selected="false" tabindex="0" onclick="switchSubTab('todo')">
+<span class="text-lg">📋</span>
+<span class="tracking-tight text-[15px] font-bold">ขั้นตอนปฏิบัติ</span>
+</button>
+<button class="flex-1 h-[48px] px-2 rounded-xl font-thai font-bold text-[15px] flex items-center justify-center gap-2 transition-all text-bio-muted hover:text-white border border-transparent" id="subTab-equip" role="tab" aria-selected="false" tabindex="0" onclick="switchSubTab('equip')">
+<span class="text-lg">🧰</span>
+<span class="tracking-tight text-[15px] font-bold">อุปกรณ์ที่ใช้</span>
+</button>
+<button class="flex-1 h-[48px] px-2 rounded-xl font-thai font-bold text-[15px] flex items-center justify-center gap-2 transition-all text-bio-muted hover:text-white border border-transparent" id="subTab-warn" role="tab" aria-selected="false" tabindex="0" onclick="switchSubTab('warn')">
+<span class="text-lg">⚠️</span>
+<span class="tracking-tight text-[15px] font-bold">ข้อควรระวัง</span>
+</button>
+</div>
+</section>
+<!-- MAIN SCROLLABLE CONTAINER -->
+<main class="flex-1 px-7 py-2 overflow-y-auto z-10 space-y-4 pb-28">
+<!-- HERO AGRONOMIC COCKPIT BANNER -->
+<div class="kiosk-hero-cockpit">
+  <div class="kiosk-hero-top">
+    <div class="flex items-center gap-3">
+      <span class="kiosk-stage-pill" id="stageBadge">ระยะที่ 1: เพาะกล้า</span>
+      <span class="kiosk-status-live-chip">
+        <span class="w-2.5 h-2.5 rounded-full bg-bio-accent"></span>
+        <span id="cockpitLiveStatus">กำลังดำเนินการเพาะ</span>
+      </span>
+    </div>
+    <div class="kiosk-cycle-day-box">
+      <span class="text-xs text-bio-muted font-thai font-semibold">รอบปลูกมะเขือเทศ</span>
+      <b class="text-bio-accent font-mono text-[18px]" id="stageDays">25 วัน</b>
+    </div>
+  </div>
+
+  <div class="kiosk-hero-body">
+    <h2 class="kiosk-hero-title font-thai font-bold text-white text-[22px]" id="stageTitle">
+      การเพาะเมล็ด &amp; อนุบาลต้นกล้า
+    </h2>
+    <p class="kiosk-hero-desc font-thai text-[14px] text-bio-muted mt-1 leading-relaxed" id="stageDesc">
+      เร่งการงอกที่สมบูรณ์ ควบคุมความชื้นสัมพัทธ์ 70–80% และเฝ้าระวังโรคเน่าคอดิน
+    </p>
+  </div>
+
+  <!-- 4-Chip Quick Agronomic Glance -->
+  <div class="kiosk-cockpit-grid">
+    <div class="kiosk-cockpit-chip">
+      <span class="kiosk-chip-icon">🗓️</span>
+      <div>
+        <span class="kiosk-chip-label">ความคืบหน้า</span>
+        <b class="kiosk-chip-value" id="stageProgress">วันที่ 12 / 110 วันรวม</b>
+      </div>
+    </div>
+    <div class="kiosk-cockpit-chip">
+      <span class="kiosk-chip-icon">🧪</span>
+      <div>
+        <span class="kiosk-chip-label">EC เป้าหมาย</span>
+        <b class="kiosk-chip-value text-bio-accent" id="cockpitTargetEc">0.8–1.2 mS/cm</b>
+      </div>
+    </div>
+    <div class="kiosk-cockpit-chip">
+      <span class="kiosk-chip-icon">💧</span>
+      <div>
+        <span class="kiosk-chip-label">pH เป้าหมาย</span>
+        <b class="kiosk-chip-value text-bio-cyan" id="cockpitTargetPh">5.8–6.2</b>
+      </div>
+    </div>
+    <div class="kiosk-cockpit-chip">
+      <span class="kiosk-chip-icon">🌡️</span>
+      <div>
+        <span class="kiosk-chip-label">อุณหภูมิโรงเรือน</span>
+        <b class="kiosk-chip-value text-amber-400" id="cockpitTargetTemp">24–28°C</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 0: TELEMETRY CHARTS & AGRONOMIC INFOGRAPHICS -->
+<div class="space-y-4" id="view-chart">
+  <!-- Top Twin Cards: EC & pH (Exact visual match to image) -->
+  <div class="grid grid-cols-2 gap-3.5">
+    <!-- EC Card -->
+    <div class="kiosk-metric-card" id="metric-card-ec">
+      <div class="kiosk-metric-header">
+        <span class="kiosk-metric-title font-mono" id="ec-header-target">EC (เป้า 1.8-2.0)</span>
+        <span class="kiosk-metric-dot bg-amber-400" id="ec-status-dot"></span>
+      </div>
+      <div class="kiosk-metric-value-row">
+        <span class="kiosk-metric-number font-display text-amber-400" id="ec-metric-value">1.7</span>
+        <span class="kiosk-metric-arrow text-amber-400" id="ec-metric-arrow">↗</span>
+      </div>
+      <div class="kiosk-metric-badge-row">
+        <span class="kiosk-metric-badge text-amber-400 bg-amber-400/10 border border-amber-400/25" id="ec-metric-badge">• ต่ำเล็กน้อย</span>
+      </div>
+    </div>
+
+    <!-- pH Card -->
+    <div class="kiosk-metric-card" id="metric-card-ph">
+      <div class="kiosk-metric-header">
+        <span class="kiosk-metric-title font-mono" id="ph-header-target">pH (เป้า 5.8-6.2)</span>
+        <span class="kiosk-metric-dot bg-bio-accent" id="ph-status-dot"></span>
+      </div>
+      <div class="kiosk-metric-value-row">
+        <span class="kiosk-metric-number font-display text-bio-accent" id="ph-metric-value">6.0</span>
+      </div>
+      <div class="kiosk-metric-badge-row">
+        <span class="kiosk-metric-badge text-bio-accent bg-bio-accent/10 border border-bio-accent/25" id="ph-metric-badge">✓ อยู่ในช่วง ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Trend Chart Card -->
+  <div class="kiosk-chart-card">
+    <div class="kiosk-chart-header">
+      <div class="kiosk-chart-title-group">
+        <span class="kiosk-chart-icon text-bio-cyan">≈</span>
+        <h3 class="kiosk-chart-title font-thai font-bold text-white text-[20px]" id="chartMainTitle">แนวโน้ม EC</h3>
+        <!-- Metric switcher buttons (EC vs pH) -->
+        <div class="flex items-center gap-1.5 ml-2 p-1 rounded-lg bg-bio-card2 border border-bio-line">
+          <button type="button" class="chart-metric-btn active" id="btn-metric-ec" onclick="switchChartMetric('ec')" aria-label="ดูกราฟ EC">EC</button>
+          <button type="button" class="chart-metric-btn" id="btn-metric-ph" onclick="switchChartMetric('ph')" aria-label="ดูกราฟ pH">pH</button>
+        </div>
+      </div>
+      <!-- Time Range Toggle (วันนี้ / 7 วัน) -->
+      <div class="kiosk-time-pills" role="group" aria-label="ช่วงเวลาแสดงผล">
+        <button type="button" class="kiosk-time-pill active" id="btn-range-today" onclick="switchChartRange('today')">วันนี้</button>
+        <button type="button" class="kiosk-time-pill" id="btn-range-week" onclick="switchChartRange('week')">7 วัน</button>
+      </div>
+    </div>
+
+    <!-- Chart Canvas / SVG Container -->
+    <div class="kiosk-svg-container" id="chartSvgWrapper">
+      <!-- Generated dynamically via JS -->
+    </div>
+
+    <!-- Chart Footer / Legend -->
+    <div class="kiosk-chart-footer">
+      <div class="kiosk-chart-legend">
+        <span class="kiosk-legend-swatch"></span>
+        <span class="kiosk-legend-text font-thai" id="chartLegendTarget">แถบเขียว = ช่วงเป้าหมาย (<span id="legendTargetRange">1.8-2.0</span>)</span>
+      </div>
+      <div class="kiosk-chart-current-value font-mono font-bold" id="chartFooterCurrent">
+        ปัจจุบัน: <span id="footerCurrentVal" class="text-amber-400">1.7 mS/cm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4-Factor Environmental Summary Matrix -->
+  <div class="glass-panel p-4 rounded-2xl border-bio-line space-y-3">
+    <div class="flex items-center justify-between border-b border-bio-line/80 pb-2">
+      <div class="flex items-center gap-2">
+        <span class="text-base text-bio-cyan">🧭</span>
+        <h4 class="font-thai font-bold text-white text-[17px]">เกณฑ์ควบคุมสิ่งแวดล้อมและสารอาหารราก</h4>
+      </div>
+      <span class="text-xs font-mono font-bold text-bio-muted bg-bio-card2 px-2.5 py-0.5 rounded border border-bio-line">4 CRITICAL FACTORS</span>
+    </div>
+
+    <div class="grid grid-cols-4 gap-2.5" id="envMatrixContainer">
+      <!-- 1. EC -->
+      <div class="kiosk-env-card">
+        <div class="kiosk-env-top">
+          <span class="kiosk-env-icon">🧪</span>
+          <span class="kiosk-env-name font-thai">ปุ๋ย EC</span>
+        </div>
+        <b class="kiosk-env-val font-mono" id="envValEc">1.7</b>
+        <div class="kiosk-env-range font-mono" id="envTargetEc">เป้า 1.8–2.0</div>
+        <span class="kiosk-env-status text-amber-400 bg-amber-400/10" id="envStatusEc">• ต่ำ</span>
+      </div>
+
+      <!-- 2. pH -->
+      <div class="kiosk-env-card">
+        <div class="kiosk-env-top">
+          <span class="kiosk-env-icon">💧</span>
+          <span class="kiosk-env-name font-thai">กรด-ด่าง pH</span>
+        </div>
+        <b class="kiosk-env-val font-mono text-bio-accent" id="envValPh">6.0</b>
+        <div class="kiosk-env-range font-mono" id="envTargetPh">เป้า 5.8–6.2</div>
+        <span class="kiosk-env-status text-bio-accent bg-bio-accent/10" id="envStatusPh">✓ ปกติ</span>
+      </div>
+
+      <!-- 3. Temp -->
+      <div class="kiosk-env-card">
+        <div class="kiosk-env-top">
+          <span class="kiosk-env-icon">🌡️</span>
+          <span class="kiosk-env-name font-thai">อุณหภูมิ</span>
+        </div>
+        <b class="kiosk-env-val font-mono text-white" id="envValTemp">26.5°C</b>
+        <div class="kiosk-env-range font-mono" id="envTargetTemp">เป้า 24–28°C</div>
+        <span class="kiosk-env-status text-bio-accent bg-bio-accent/10" id="envStatusTemp">✓ ปกติ</span>
+      </div>
+
+      <!-- 4. Humidity -->
+      <div class="kiosk-env-card">
+        <div class="kiosk-env-top">
+          <span class="kiosk-env-icon">💨</span>
+          <span class="kiosk-env-name font-thai">ความชื้น RH</span>
+        </div>
+        <b class="kiosk-env-val font-mono text-bio-cyan" id="envValHum">74%</b>
+        <div class="kiosk-env-range font-mono" id="envTargetHum">เป้า 70–80%</div>
+        <span class="kiosk-env-status text-bio-cyan bg-bio-cyan/10" id="envStatusHum">✓ เหมาะสม</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actionable Farmer Guide (อินโฟกราฟิกรายละเอียดและคำแนะนำสำหรับเกษตรกร) -->
+  <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-4">
+    <div class="flex items-center justify-between border-b border-bio-line/80 pb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-bio-accent/20 border border-bio-accent/40 text-bio-accent flex items-center justify-center font-bold text-lg">💡</div>
+        <div>
+          <h4 class="font-thai font-bold text-white text-[19px]">คำแนะนำการจัดการสำหรับเกษตรกร</h4>
+          <p class="font-thai text-sm text-bio-muted" id="guideSubtitle">แนวทางปฏิบัติประจำระยะสำหรับค่า EC และ pH</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-bio-card2 border border-bio-line text-bio-cyan" id="guideStatusTag">ACTION PLAN</span>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3" id="guideCardsContainer">
+      <!-- EC Explainer & Action -->
+      <div class="p-4 rounded-xl bg-bio-card2 border border-bio-line/90 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="font-thai font-bold text-[17px] text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400" id="guideEcDot"></span>
+            <span>ความเข้มข้นปุ๋ย (EC)</span>
+          </span>
+          <span class="text-xs font-mono font-bold text-amber-400 px-2.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/25" id="guideEcStatus">ต่ำกว่าเป้า 0.1</span>
+        </div>
+        <p class="font-thai text-[15px] text-bio-body leading-relaxed" id="guideEcMeaning">
+          ค่า EC แสดงปริมาณเกลือแร่และธาตุอาหารทั้งหมดในน้ำปลูก หากต่ำกว่าเป้าหมาย ต้นจะได้รับไนโตรเจนและแคลเซียมไม่เพียงพอต่อการสร้างลำต้น
+        </p>
+        <div class="p-3 rounded-lg bg-bio-dark/70 border border-bio-line flex items-start gap-2.5 mt-2">
+          <span class="text-bio-accent font-bold mt-0.5">👉</span>
+          <p class="font-thai text-[14px] text-bio-cyan font-semibold leading-relaxed" id="guideEcAction">
+            <b>วิธีปฏิบัติทันที:</b> เติมสารละลายแม่ปุ๋ย A และ B สัดส่วนเท่ากันอย่างละ 150 ml ลงในถังจ่ายน้ำ กวนผสมให้เข้ากัน 5 นาทีแล้ววัดซ้ำ
+          </p>
+        </div>
+      </div>
+
+      <!-- pH Explainer & Action -->
+      <div class="p-4 rounded-xl bg-bio-card2 border border-bio-line/90 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="font-thai font-bold text-[17px] text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-bio-accent" id="guidePhDot"></span>
+            <span>ความเป็นกรด-ด่าง (pH)</span>
+          </span>
+          <span class="text-xs font-mono font-bold text-bio-accent px-2.5 py-1 rounded-full bg-bio-accent/10 border border-bio-accent/25" id="guidePhStatus">เหมาะสมสมบูรณ์</span>
+        </div>
+        <p class="font-thai text-[15px] text-bio-body leading-relaxed" id="guidePhMeaning">
+          ค่า pH ส่งผลต่อความสามารถในการดูดซึมธาตุอาหารของราก ค่า 6.0 อยู่ในจุดที่ดีที่สุด (Sweet Spot) รากดูดซึมฟอสฟอรัสและแมกนีเซียมได้เต็มที่ 100%
+        </p>
+        <div class="p-3 rounded-lg bg-bio-dark/70 border border-bio-line flex items-start gap-2.5 mt-2">
+          <span class="text-bio-accent font-bold mt-0.5">✓</span>
+          <p class="font-thai text-[14px] text-white font-medium leading-relaxed" id="guidePhAction">
+            <b>คำแนะนำ:</b> ค่าสมดุลดีเยี่ยม รักษาระดับน้ำในถังพักและตรวจเช็กอีกครั้งในรอบบ่าย ไม่ต้องเติมสารเคมีปรับสภาพน้ำ
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 1: TO-DO LIST DETAILED -->
+<div class="space-y-3.5 hidden" id="view-todo">
+<div class="flex items-center justify-between px-1">
+<span class="font-thai font-bold text-white text-[19px] flex items-center gap-2.5">
+<svg class="w-6 h-6 text-bio-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+          ขั้นตอนการปฏิบัติรายวัน</span>
+<span class="font-thai font-bold text-bio-accent text-[16px] bg-bio-accent/15 px-3.5 py-1 rounded-full border border-bio-accent/35" id="todoCounter">
+          3 งานวันนี้
+        </span>
+<span class="todo-progress-pill" id="todoProgress">เหลือ 2 งาน</span>
+</div>
+<div class="space-y-3.5" id="todoContainer">
+    <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5 hover:border-bio-accent/40 transition-all">
+      <div class="flex items-center justify-between border-b border-bio-line/80 pb-2.5">
+        <span class="px-3.5 py-1.5 rounded-xl bg-bio-card2 border border-bio-line text-[18px] font-mono font-bold text-bio-accent">
+          07:30 น. • เช้าตรู่
+        </span>
+        <span class="text-xs font-mono px-2.5 py-1 rounded bg-bio-card font-semibold text-bio-muted border border-bio-line">
+          ITEM 01
+        </span>
+      </div>
+      
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="text-[23px] font-thai font-bold text-white leading-snug tracking-tight">
+            แช่เมล็ดพันธุ์ในน้ำอุ่น 50°C เป็นเวลา 30 นาที
+          </h3>
+          <p class="text-[17px] font-thai text-bio-body mt-1.5 leading-relaxed">
+            คัดเลือกเมล็ดที่สมบูรณ์ เมล็ดเต็ม ไม่ลอยน้ำ แช่น้ำอุ่นควบคุมอุณหภูมิคงที่เพื่อกระตุ้นการงอกและทำลายเชื้อราที่อาจปนเปื้อนผิวเปลือกเมล็ด
+          </p>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                อุณหภูมิเป้าหมาย: 48–50°C
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                ระยะเวลา: 30 นาที
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                คัดเมล็ดจมน้ำ
+              </span>
+            
+          </div>
+        </div>
+
+        <!-- Big 48px touch-friendly status/checkbox button -->
+        <button onclick="toggleTodoCheck(this)" class="w-12 h-12 rounded-xl flex items-center justify-center font-thai font-bold flex-shrink-0 transition-all bg-bio-accent text-bio-dark shadow-[0_0_16px_rgba(0,255,135,0.45)]" title="ทำเครื่องหมายว่าเสร็จสิ้น">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  
+    <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5 hover:border-bio-accent/40 transition-all">
+      <div class="flex items-center justify-between border-b border-bio-line/80 pb-2.5">
+        <span class="px-3.5 py-1.5 rounded-xl bg-bio-card2 border border-bio-line text-[18px] font-mono font-bold text-bio-cyan">
+          10:00 น. • ช่วงสาย
+        </span>
+        <span class="text-xs font-mono px-2.5 py-1 rounded bg-bio-card font-semibold text-bio-muted border border-bio-line">
+          ITEM 02
+        </span>
+      </div>
+      
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="text-[23px] font-thai font-bold text-white leading-snug tracking-tight">
+            หยอดเมล็ดลงถาดเพาะ 104 หลุม และกลบวัสดุโปร่ง
+          </h3>
+          <p class="text-[17px] font-thai text-bio-body mt-1.5 leading-relaxed">
+            ใช้วัสดุเพาะพีทมอสชุ่มชื้นพอเหมาะ หยอดเมล็ดหลุมละ 1 เมล็ด ลึกประมาณ 0.5 ซม. กลบหน้าเบามือและพรางแสง 50% วางในที่อากาศถ่ายเทสะดวก
+          </p>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                พีทมอสคุณภาพสูง
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                ลึก 0.5 ซม.
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                พรางแสง 50%
+              </span>
+            
+          </div>
+        </div>
+
+        <!-- Big 48px touch-friendly status/checkbox button -->
+        <button onclick="toggleTodoCheck(this)" class="w-12 h-12 rounded-xl flex items-center justify-center font-thai font-bold flex-shrink-0 transition-all bg-bio-card2 border-2 border-bio-line text-bio-muted hover:border-bio-accent/60" title="ทำเครื่องหมายว่าเสร็จสิ้น">
+          <span class="text-xs font-mono font-bold">รอทำ</span>
+        </button>
+      </div>
+    </div>
+  
+    <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5 hover:border-bio-accent/40 transition-all">
+      <div class="flex items-center justify-between border-b border-bio-line/80 pb-2.5">
+        <span class="px-3.5 py-1.5 rounded-xl bg-bio-card2 border border-bio-line text-[18px] font-mono font-bold text-bio-muted">
+          16:00 น. • ช่วงเย็น
+        </span>
+        <span class="text-xs font-mono px-2.5 py-1 rounded bg-bio-card font-semibold text-bio-muted border border-bio-line">
+          ITEM 03
+        </span>
+      </div>
+      
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="text-[23px] font-thai font-bold text-white leading-snug tracking-tight">
+            พ่นละอองฝอยรักษาสภาพความชื้นและตรวจโรคเน่าคอดิน
+          </h3>
+          <p class="text-[17px] font-thai text-bio-body mt-1.5 leading-relaxed">
+            สเปรย์ละอองน้ำละเอียดทั่วแปลงเพาะ ควบคุมความชื้นสัมพัทธ์ 70–80% ตรวจสอบโคนต้นกล้าไม่ให้มีรอยช้ำคอดินจากเชื้อรา
+          </p>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                ความชื้น: 70–80%
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                ตรวจโคนเน่าคอดิน
+              </span>
+            
+              <span class="px-3 py-1 rounded-lg bg-bio-card2 border border-bio-line text-bio-cyan font-thai font-bold text-[16px]">
+                ละอองน้ำละเอียด
+              </span>
+            
+          </div>
+        </div>
+
+        <!-- Big 48px touch-friendly status/checkbox button -->
+        <button onclick="toggleTodoCheck(this)" class="w-12 h-12 rounded-xl flex items-center justify-center font-thai font-bold flex-shrink-0 transition-all bg-bio-card2 border-2 border-bio-line text-bio-muted hover:border-bio-accent/60" title="ทำเครื่องหมายว่าเสร็จสิ้น">
+          <span class="text-xs font-mono font-bold">รอทำ</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- VIEW 2: EQUIPMENT TO BUY & PREPARE -->
+<div class="space-y-3.5 hidden" id="view-equip">
+<div class="flex items-center justify-between px-1">
+<span class="font-thai font-bold text-white text-[19px] flex items-center gap-2">
+<svg class="w-6 h-6 text-bio-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+          รายการวัสดุและอุปกรณ์ที่ต้องจัดซื้อ / เตรียมใช้งาน
+        </span>
+<span class="font-thai text-bio-cyan bg-bio-cyan/15 px-3 py-1 rounded-full border border-bio-cyan/35 text-sm font-bold">เช็กลิสต์อุปกรณ์</span>
+</div>
+<div class="space-y-3.5" id="equipContainer">
+    <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5">
+      <div class="flex items-center gap-3 border-b border-bio-line/80 pb-2.5">
+        <div class="w-10 h-10 rounded-xl bg-bio-accent/20 border-bio-accent/40 text-bio-accent border flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+        </div>
+        <div>
+          <h3 class="text-[20px] font-thai font-bold text-white leading-tight">1. วัสดุเพาะและเมล็ดพันธุ์</h3>
+          <p class="text-sm font-thai text-bio-muted">รายการสำคัญสำหรับ Stage 1</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-accent shadow-[0_0_8px_rgba(0,255,135,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">เมล็ดพันธุ์มะเขือเทศพรีเมียม</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">อัตราการงอก &gt;85% ปลอดเชื้อ</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-accent shadow-[0_0_8px_rgba(0,255,135,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">ถาดเพาะกล้าขนาด 104 หลุม</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">พลาสติกหนา ระบายน้ำก้นหลุมดี</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-accent shadow-[0_0_8px_rgba(0,255,135,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">พีทมอสคัดเกรดพิเศษ</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">เนื้อละเอียด อุ้มน้ำและโปร่งพอดี</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-accent shadow-[0_0_8px_rgba(0,255,135,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">ขุยมะพร้าวร่อนละเอียดล้างสาร</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">แช่น้ำลดค่าแทนนินเรียบร้อย</span>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  
+    <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5">
+      <div class="flex items-center gap-3 border-b border-bio-line/80 pb-2.5">
+        <div class="w-10 h-10 rounded-xl bg-bio-cyan/20 border-bio-cyan/40 text-bio-cyan border flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+        </div>
+        <div>
+          <h3 class="text-[20px] font-thai font-bold text-white leading-tight">2. เครื่องมือวัดและพ่นละอองน้ำ</h3>
+          <p class="text-sm font-thai text-bio-muted">รายการสำคัญสำหรับ Stage 1</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">เทอร์โมมิเตอร์วัดน้ำดิจิทัล</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">ความแม่นยำสูง วัดน้ำแช่ 50°C</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">กระบอกพ่นละอองฝอยแรงดัน</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">ละอองละเอียด ไม่กระทบต้นกล้า</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">เครื่องวัดความชื้นสัมพัทธ์</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">ตรวจจับค่าความชื้น 70-80%</span>
+            </div>
+          </div>
+        
+          <div class="p-3.5 rounded-xl bg-bio-card2 border border-bio-line/90 flex items-start gap-3">
+            <span class="w-3 h-3 rounded-full bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)] mt-1.5 flex-shrink-0"></span>
+            <div>
+              <b class="text-white block font-thai font-bold text-[18px] leading-snug">สแลนพรางแสง 50%</b>
+              <span class="text-[15px] font-thai text-bio-muted mt-0.5 block leading-normal">ลดความเข้มแสงแดดช่วงเที่ยงวัน</span>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- VIEW 3: PRECAUTIONS & AGRONOMIC BENCHMARKS -->
+<div class="space-y-4 hidden" id="view-warn">
+  <!-- Hazard Alerts Header Banner -->
+  <div class="p-4 rounded-2xl border border-red-500/40 bg-gradient-to-r from-red-950/40 via-red-900/20 to-transparent flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/50 text-red-400 flex items-center justify-center font-bold text-xl flex-shrink-0">
+        ⚠️
+      </div>
+      <div>
+        <h3 id="warnHeader" class="text-[19px] font-thai font-bold text-white leading-tight">
+          ข้อควรระวังสำคัญสำหรับระยะเพาะกล้า (Stage 1)
+        </h3>
+        <p class="text-[13px] font-thai text-red-200/80 mt-0.5">
+          ตรวจพบสัญญาณเตือนให้ดำเนินการตามคำแนะนำทันทีก่อนผลผลิตเสียหาย
+        </p>
+      </div>
+    </div>
+    <span class="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 flex-shrink-0">
+      CRITICAL ALERTS
+    </span>
+  </div>
+
+  <!-- Dynamic Hazard Cards List -->
+  <div class="space-y-3" id="warnList">
+    <!-- Populated dynamically by js/info.js -->
+  </div>
+
+  <!-- Agronomic Quality Benchmarks Card -->
+  <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5">
+    <div class="flex items-center justify-between border-b border-bio-line/80 pb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-bio-accent/20 border border-bio-accent/40 text-bio-accent flex items-center justify-center font-bold">
+          🎯
+        </div>
+        <div>
+          <h4 id="warnAdviceTitle" class="text-[18px] font-thai font-bold text-white leading-tight">
+            เกณฑ์การคัดเลือกต้นกล้าก่อนย้ายปลูก (วันที่ 18–25)
+          </h4>
+          <p id="warnAdviceDesc" class="text-[13px] font-thai text-bio-muted mt-0.5">
+            ต้นกล้าที่ดีต้องมีใบจริง 4–6 ใบ ลำต้นอวบหนาสีเขียวเข้ม ข้อใบสั้นกระชับ ไม่มีรอยจุดสีน้ำตาลหรือแมลงใต้ใบ
+          </p>
+        </div>
+      </div>
+      <span class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-bio-card2 border border-bio-line text-bio-accent flex-shrink-0">
+        QUALITY CRITERIA
+      </span>
+    </div>
+
+    <!-- 4 Benchmarks Grid -->
+    <div id="warnBenchmarkGrid" class="kiosk-benchmark-grid">
+      <!-- Populated dynamically by js/info.js -->
+    </div>
+  </div>
+</div>
+</main>
+<!-- BOTTOM HARDWARE KIOSK CONTROL BAR -->
+<nav class="info-bottom-nav" data-purpose="bottom-navigation-bar">
+  <a class="info-bottom-link" href="index.html" id="nav-home-btn">
+    <svg class="info-bottom-icon info-bottom-icon-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+    <span>หน้าหลัก</span>
+  </a>
+  <a class="info-bottom-link info-bottom-link-active" href="info.html" id="nav-more-btn">
+    <svg class="info-bottom-icon info-bottom-icon-active" fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.07-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.22-.08.47 0 .59.22l1.92 3.32c.12.22.07.47-.12.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
+    <span>ข้อมูลเพิ่มเติม</span>
+  </a>
+</nav>
+</div>
+<!-- SCRIPT FOR STAGE SWITCHING & TAB TOGGLING -->
+<script src="js/info.js"></script>
+
+
+</body></html>

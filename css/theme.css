@@ -1,0 +1,789 @@
+/* ==========================================================================
+   PLANT A CONTROL - DAY & NIGHT THEME (พระอาทิตย์ ☀️ & ดวงจันทร์ 🌙)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Day / Night Segmented Control Bar (Touch Friendly min 44px)
+   -------------------------------------------------------------------------- */
+.day-night-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 9999px;
+  background: #0a1419;
+  border: 1px solid #1c323e;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  user-select: none;
+}
+
+.day-night-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a9b3;
+  font-family: 'Prompt', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.day-night-btn:hover {
+  color: #f1f7f9;
+}
+
+.day-night-btn .day-night-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Day Active Pill (☀️ พระอาทิตย์ สีทองอบอุ่น) */
+.day-night-btn.active.day {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #fbbf24;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Night Active Pill (🌙 ดวงจันทร์ สีเขียว-ฟ้าเรืองแสง) */
+.day-night-btn.active.night {
+  background: linear-gradient(135deg, #182e38 0%, #10222a 100%);
+  border-color: rgba(46, 243, 135, 0.6);
+  color: #2ef387;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT / DAY MODE (☀️ ธีมกลางวัน & แสงแดดธรรมชาติ)
+   -------------------------------------------------------------------------- */
+html[data-theme="day"],
+body.theme-day {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Custom Scrollbar in Day Mode */
+body.theme-day ::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.theme-day ::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+
+body.theme-day ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 9999px;
+}
+
+body.theme-day ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Kiosk viewport & background */
+body.theme-day .kiosk-viewport {
+  background: radial-gradient(circle at 50% 18%, #f0f7f9 0%, #e2edf1 72%) !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1) !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-canvas {
+  background: radial-gradient(circle at 50% 18%, #f0f7f9 0%, #e2edf1 68%) !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1) !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Main scrollable area in info.html ends cleanly above floating bottom nav */
+body.theme-day .kiosk-canvas>main {
+  margin-bottom: 92px !important;
+  padding-bottom: 16px !important;
+}
+
+/* Segmented control in Day Mode */
+body.theme-day .day-night-control {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+body.theme-day .day-night-btn {
+  color: #64748b;
+}
+
+body.theme-day .day-night-btn:hover {
+  color: #0f172a;
+}
+
+/* Top System Headers */
+body.theme-day header[data-purpose="system-header"],
+body.theme-day .info-system-header {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+
+body.theme-day header[data-purpose="system-header"] h1,
+body.theme-day .info-system-header h1 {
+  color: #0f172a !important;
+}
+
+body.theme-day .header-status-pill,
+body.theme-day .info-status-pill {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+body.theme-day .header-time,
+body.theme-day #info-current-time {
+  color: #0f172a !important;
+}
+
+/* Base Cards & Glass panels */
+body.theme-day .glass-card,
+body.theme-day .glass-panel {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
+}
+
+body.theme-day .glass-panel-active {
+  background: #e8f8f0 !important;
+  border-color: #059669 !important;
+}
+
+/* Text color adaptations */
+body.theme-day .text-white {
+  color: #0f172a !important;
+}
+
+body.theme-day .text-neutral-400,
+body.theme-day .text-neutral-500 {
+  color: #64748b !important;
+}
+
+body.theme-day .text-neutral-300 {
+  color: #334155 !important;
+}
+
+body.theme-day .text-neutral-200,
+body.theme-day .text-neutral-100 {
+  color: #0f172a !important;
+}
+
+body.theme-day .text-bio-muted {
+  color: #64748b !important;
+}
+
+body.theme-day .text-bio-body {
+  color: #334155 !important;
+}
+
+body.theme-day .text-bio-cyan {
+  color: #0284c7 !important;
+}
+
+body.theme-day .text-bio-accent {
+  color: #059669 !important;
+}
+
+/* Generic Background replacements */
+body.theme-day .bg-\[\#122227\],
+body.theme-day .bg-\[\#162128\],
+body.theme-day .bg-\[\#111b22\],
+body.theme-day .bg-\[\#141c22\],
+body.theme-day .bg-bio-card,
+body.theme-day .bg-bio-card2,
+body.theme-day .bg-bio-dark {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .border-\[\#1c323e\],
+body.theme-day .border-\[\#2b3c46\],
+body.theme-day .border-bio-line {
+  border-color: #cbd5e1 !important;
+}
+
+/* Telemetry progress bar track replacements (removes dark black bars) */
+body.theme-day .bg-\[\#1a2830\] {
+  background-color: #e2e8f0 !important;
+}
+
+/* Lifecycle Stage Tracker (index.html) */
+body.theme-day [data-purpose="lifecycle-tracker"] .bg-\[\#1c2930\],
+body.theme-day .absolute.h-1.bg-\[\#1c2930\] {
+  background-color: #cbd5e1 !important;
+}
+
+body.theme-day [id^="stage-icon-"] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #64748b !important;
+}
+
+body.theme-day [id^="stage-icon-"] svg {
+  color: #64748b !important;
+}
+
+body.theme-day [id^="stage-btn-"][aria-selected="true"] [id^="stage-icon-"] {
+  background-color: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+body.theme-day [id^="stage-btn-"][aria-selected="true"] [id^="stage-icon-"] svg {
+  color: #ffffff !important;
+}
+
+body.theme-day [id^="stage-label-"] {
+  color: #64748b !important;
+}
+
+body.theme-day [id^="stage-btn-"][aria-selected="true"] [id^="stage-label-"] {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+/* Specimen Center Viewport & Plant Water Reservoir (index.html) */
+body.theme-day .bg-radial-gradient-plant {
+  background: radial-gradient(circle at 50% 50%, rgba(254, 240, 138, 0.25) 0%, rgba(240, 249, 255, 0.6) 50%, rgba(226, 232, 240, 0.4) 100%) !important;
+}
+
+body.theme-day [data-purpose="specimen-monitoring-zone"] .bg-gradient-to-b {
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.1) 50%, rgba(203, 213, 225, 0.4) 100%) !important;
+  border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+/* TO DO LIST Section (index.html) */
+body.theme-day #equipment-link {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+body.theme-day #equipment-link:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+body.theme-day .task-item-card {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.theme-day .task-item-card:hover {
+  background-color: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+
+body.theme-day .task-item-card.is-completed {
+  background-color: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+
+body.theme-day .task-item-card .task-text {
+  color: #0f172a !important;
+}
+
+body.theme-day .task-item-card.is-completed .task-text {
+  color: #047857 !important;
+  text-decoration: line-through;
+  text-decoration-color: rgba(5, 150, 105, 0.5) !important;
+}
+
+body.theme-day .task-item-card span.font-mono {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+}
+
+body.theme-day .task-item-card.is-completed span.font-mono {
+  background-color: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #065f46 !important;
+}
+
+body.theme-day .task-check-btn {
+  background: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+}
+
+body.theme-day .task-check-btn:hover {
+  border-color: #059669 !important;
+}
+
+body.theme-day .task-check-btn.is-checked {
+  background: #059669 !important;
+  border-color: #059669 !important;
+}
+
+body.theme-day .task-check-btn.is-checked .check-dot {
+  background: #ffffff !important;
+}
+
+body.theme-day .task-item-card a[title="ดูรายละเอียดขั้นตอน"] {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+}
+
+body.theme-day .task-item-card a[title="ดูรายละเอียดขั้นตอน"]:hover {
+  color: #0369a1 !important;
+}
+
+/* Bottom Navigation Bar (Both index.html and info.html) */
+body.theme-day nav[data-purpose="bottom-navigation-bar"],
+body.theme-day .info-bottom-nav {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.theme-day #nav-home-btn.border-emerald-400,
+body.theme-day nav[data-purpose="bottom-navigation-bar"] a.border-emerald-400,
+body.theme-day .info-bottom-link-active {
+  background: #e6f7ef !important;
+  border-color: #059669 !important;
+  color: #064e3b !important;
+}
+
+body.theme-day #nav-home-btn.border-emerald-400 svg,
+body.theme-day .info-bottom-icon-active {
+  color: #059669 !important;
+}
+
+body.theme-day #nav-home-btn.border-emerald-400 span,
+body.theme-day .info-bottom-link-active span {
+  color: #064e3b !important;
+  font-weight: 700 !important;
+}
+
+body.theme-day #nav-more-btn:not(.border-emerald-400),
+body.theme-day .info-bottom-link:not(.info-bottom-link-active) {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day #nav-more-btn:not(.border-emerald-400) svg,
+body.theme-day .info-bottom-link:not(.info-bottom-link-active) svg {
+  color: #64748b !important;
+}
+
+body.theme-day #nav-more-btn:not(.border-emerald-400) span,
+body.theme-day .info-bottom-link:not(.info-bottom-link-active) span {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+body.theme-day #nav-more-btn:hover,
+body.theme-day .info-bottom-link:not(.info-bottom-link-active):hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+/* Stage Tabs (info.html) */
+body.theme-day .stage-tab.glass-panel {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .stage-tab .stage-name {
+  color: #0f172a !important;
+}
+
+body.theme-day .stage-tab .stage-days {
+  color: #059669 !important;
+}
+
+body.theme-day .stage-tab .stage-state {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day .stage-tab.glass-panel-active .stage-state {
+  background: #d1fae5 !important;
+  border-color: #059669 !important;
+  color: #065f46 !important;
+}
+
+body.theme-day .stage-node {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day .stage-tab.glass-panel-active .stage-node-active {
+  background: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+body.theme-day .bg-bio-line\/80 {
+  background-color: #cbd5e1 !important;
+}
+
+/* Kiosk Cockpit Banner & Chips (info.html) */
+body.theme-day .kiosk-hero-cockpit {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-hero-title {
+  color: #0f172a !important;
+}
+
+body.theme-day .kiosk-hero-desc {
+  color: #475569 !important;
+}
+
+body.theme-day .kiosk-cockpit-chip {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-chip-label {
+  color: #64748b !important;
+}
+
+body.theme-day .kiosk-chip-value {
+  color: #0f172a !important;
+}
+
+/* Subtabs bar in Day Mode (info.html) */
+body.theme-day section div[role="tablist"],
+body.theme-day .bg-bio-surface\/90,
+body.theme-day .bg-bio-surface {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day button[id^="subTab-"] {
+  color: #475569 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.theme-day button[id^="subTab-"]:hover {
+  color: #0f172a !important;
+  background-color: #e2e8f0 !important;
+}
+
+body.theme-day button[id^="subTab-"][aria-selected="true"],
+body.theme-day button[id^="subTab-"].bg-bio-card2 {
+  background: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Metric Twin Cards */
+body.theme-day .kiosk-metric-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-metric-header {
+  color: #475569 !important;
+}
+
+body.theme-day .kiosk-metric-val {
+  color: #0f172a !important;
+}
+
+body.theme-day #ec-status-dot,
+body.theme-day #ph-status-dot {
+  box-shadow: none !important;
+}
+
+/* Trend Chart Card & SVG Container (info.html) */
+body.theme-day .kiosk-chart-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-chart-title {
+  color: #0f172a !important;
+}
+
+body.theme-day .chart-metric-btn {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day .chart-metric-btn.active {
+  background: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+body.theme-day .kiosk-time-pill {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day .kiosk-time-pill.active {
+  background: #0284c7 !important;
+  border-color: #0369a1 !important;
+  color: #ffffff !important;
+}
+
+body.theme-day .kiosk-svg-container {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-svg-container line {
+  stroke: #e2e8f0 !important;
+}
+
+body.theme-day .kiosk-svg-container text {
+  fill: #475569 !important;
+}
+
+body.theme-day .kiosk-svg-container rect {
+  fill: rgba(5, 150, 105, 0.08) !important;
+  stroke: rgba(5, 150, 105, 0.45) !important;
+}
+
+body.theme-day .kiosk-svg-container rect+text {
+  fill: #065f46 !important;
+}
+
+body.theme-day .kiosk-svg-container path[stroke="#22d3ee"] {
+  stroke: #0284c7 !important;
+}
+
+body.theme-day .kiosk-svg-container circle[fill="#22d3ee"] {
+  fill: #0284c7 !important;
+}
+
+body.theme-day .kiosk-svg-container circle[stroke="#2ef387"] {
+  stroke: #059669 !important;
+}
+
+body.theme-day .kiosk-svg-container circle[fill="#2ef387"] {
+  fill: #059669 !important;
+}
+
+body.theme-day .kiosk-svg-container #curveGradient stop:first-child {
+  stop-color: #0284c7 !important;
+  stop-opacity: 0.18 !important;
+}
+
+body.theme-day .kiosk-legend-text {
+  color: #475569 !important;
+}
+
+body.theme-day #chartFooterCurrent {
+  color: #0f172a !important;
+}
+
+/* Environmental Matrix Cards */
+body.theme-day .kiosk-env-card {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-env-val {
+  color: #0f172a !important;
+}
+
+body.theme-day .kiosk-env-name {
+  color: #64748b !important;
+}
+
+/* Action Callout Boxes & Farmer Guide (info.html) */
+body.theme-day .bg-bio-dark\/70,
+body.theme-day .bg-bio-dark {
+  background-color: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+}
+
+body.theme-day .bg-bio-dark\/70 p,
+body.theme-day .bg-bio-dark p {
+  color: #065f46 !important;
+}
+
+body.theme-day .bg-bio-dark\/70 b,
+body.theme-day .bg-bio-dark b {
+  color: #064e3b !important;
+}
+
+body.theme-day .bg-bio-dark\/70 span,
+body.theme-day .bg-bio-dark span {
+  color: #059669 !important;
+}
+
+body.theme-day #guideSubtitle {
+  color: #475569 !important;
+}
+
+body.theme-day #guideEcMeaning,
+body.theme-day #guidePhMeaning {
+  color: #334155 !important;
+}
+
+body.theme-day #guideStatusTag {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+}
+
+/* View 1: To-Do SOP Checklist Cards (info.html) */
+body.theme-day .todo-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .todo-card-title {
+  color: #0f172a !important;
+}
+
+body.theme-day .todo-card-desc {
+  color: #475569 !important;
+}
+
+body.theme-day .todo-time {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+}
+
+body.theme-day .todo-step-label {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #64748b !important;
+}
+
+body.theme-day .todo-sop-numbered-step {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-day .todo-sop-step-text {
+  color: #0f172a !important;
+}
+
+body.theme-day .todo-check-button {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+body.theme-day .todo-check-button.is-done {
+  background: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+}
+
+body.theme-day #todoCounter {
+  background-color: #d1fae5 !important;
+  border-color: #6ee7b7 !important;
+  color: #065f46 !important;
+}
+
+body.theme-day #todoProgress {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0284c7 !important;
+}
+
+/* View 2: Equipment Cards (info.html) */
+body.theme-day .kiosk-equip-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-equip-title {
+  color: #0f172a !important;
+}
+
+body.theme-day .kiosk-equip-item {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-day .kiosk-equip-name {
+  color: #0f172a !important;
+}
+
+body.theme-day .kiosk-equip-spec {
+  color: #475569 !important;
+}
+
+body.theme-day .kiosk-equip-tip {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #166534 !important;
+}
+
+/* View 3: Hazard & Benchmark Cards (info.html) */
+body.theme-day .kiosk-hazard-card {
+  background: #fff5f5 !important;
+  border-color: #fca5a5 !important;
+}
+
+body.theme-day .kiosk-hazard-title {
+  color: #991b1b !important;
+}
+
+body.theme-day .kiosk-hazard-badge {
+  background: #fee2e2 !important;
+  border-color: #f87171 !important;
+  color: #b91c1c !important;
+}
+
+body.theme-day .kiosk-hazard-col {
+  background: #ffffff !important;
+  border-color: #fecaca !important;
+}
+
+body.theme-day .kiosk-hazard-col-title {
+  color: #991b1b !important;
+}
+
+body.theme-day .kiosk-hazard-col-text {
+  color: #374151 !important;
+}
+
+body.theme-day .kiosk-benchmark-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-day .kiosk-benchmark-icon {
+  background: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #059669 !important;
+}
+
+body.theme-day .kiosk-benchmark-card b {
+  color: #0f172a !important;
+}
+
+body.theme-day .kiosk-benchmark-text {
+  color: #475569 !important;
+}
+
+body.theme-day #warnAdviceTitle {
+  color: #0f172a !important;
+}
+
+body.theme-day #warnAdviceDesc {
+  color: #475569 !important;
+}

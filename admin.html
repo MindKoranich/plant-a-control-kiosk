@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PLANT A CONTROL - ระบบจัดการสำหรับผู้ดูแลระบบ (Admin Console)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <!-- Google Fonts for Thai and Monospace typography -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <!-- Admin Styling -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="p-4 md:p-8">
+
+  <!-- ==================================================================== -->
+  <!-- 1. LOGIN GATE SCREEN (แสดงเมื่อยังไม่ล็อกอิน)                         -->
+  <!-- ==================================================================== -->
+  <div id="admin-login-view" class="max-w-md mx-auto my-16 admin-glass p-8 space-y-6">
+    <div class="text-center space-y-2">
+      <div class="w-16 h-16 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400 text-emerald-400 mx-auto flex items-center justify-center text-3xl font-bold">
+        🔒
+      </div>
+      <h1 class="text-2xl font-bold text-white tracking-wide">ระบบจัดการผู้ดูแลระบบ</h1>
+      <p class="text-sm text-neutral-400">กรุณาใส่รหัสผ่านเพื่อเข้าสู่แผงควบคุมและแก้ไขตัวเลข</p>
+    </div>
+
+    <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4">
+      <div>
+        <label for="admin-password-input" class="admin-label">รหัสผ่านผู้ดูแลระบบ (Admin Password)</label>
+        <div class="relative">
+          <input type="password" id="admin-password-input" class="admin-input admin-input-mono" placeholder="ใส่รหัสผ่าน..." required autocomplete="current-password">
+          <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs px-2 py-1 font-bold">
+            แสดง
+          </button>
+        </div>
+        <p class="text-xs text-neutral-500 mt-1.5">🔑 รหัสผ่านเริ่มต้น: <span class="font-mono text-emerald-400 font-bold">admin</span></p>
+      </div>
+
+      <div id="login-error-msg" class="hidden text-sm text-red-400 bg-red-950/40 border border-red-500/30 p-3 rounded-lg text-center font-bold">
+        รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
+      </div>
+
+      <button type="submit" class="admin-btn-primary w-full">
+        <span>เข้าสู่ระบบจัดการ</span>
+        <span>→</span>
+      </button>
+    </form>
+
+    <div class="pt-4 border-t border-[#1e3947] text-center">
+      <a href="index.html" class="text-sm text-neutral-400 hover:text-emerald-400 transition-colors inline-flex items-center gap-2">
+        <span>← กลับสู่หน้าจอ Kiosk สำหรับเกษตรกร</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- 2. ADMIN DASHBOARD (แสดงเมื่อล็อกอินสำเร็จแล้ว)                       -->
+  <!-- ==================================================================== -->
+  <div id="admin-dashboard-view" class="max-w-6xl mx-auto space-y-6 hidden">
+    
+    <!-- Top Bar Header -->
+    <header class="admin-glass p-5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400 text-emerald-400 flex items-center justify-center text-2xl font-bold">
+          ⚙️
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-xl font-bold text-white leading-tight">PLANT A CONTROL — แผงควบคุมผู้ดูแลระบบ</h1>
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/50">ADMIN AUTHORIZED</span>
+          </div>
+          <p class="text-xs text-neutral-400 mt-0.5" id="adminChamberSub">Chamber A • Tomato Specimen 01</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <a href="index.html" class="admin-btn-secondary" title="เปิดหน้าหลัก Kiosk">
+          <span>🖥️ หน้าหลัก Kiosk</span>
+        </a>
+        <a href="info.html" class="admin-btn-secondary" title="เปิดหน้าข้อมูลเพิ่มเติม Kiosk">
+          <span>📊 หน้าข้อมูลเพิ่มเติม</span>
+        </a>
+        <button type="button" onclick="handleAdminLogout()" class="admin-btn-danger" title="ออกจากระบบ">
+          <span>🚪 ออกจากระบบ</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Global Action Bar -->
+    <div class="admin-glass p-4 flex flex-wrap items-center justify-between gap-3 bg-[#0d1c24]/90 border-emerald-500/40">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        <span class="text-sm font-bold text-white">การจัดการค่าพารามิเตอร์:</span>
+        <span class="text-xs text-neutral-300" id="save-status-text">พร้อมบันทึกการเปลี่ยนแปลง</span>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <button type="button" onclick="saveKioskData()" class="admin-btn-primary" title="บันทึกและส่งข้อมูลไปยังตู้ Kiosk ทันที">
+          <span>💾 บันทึกข้อมูลเข้าตู้ Kiosk ทันที</span>
+        </button>
+        <button type="button" onclick="downloadJsonFile()" class="admin-btn-secondary" title="ดาวน์โหลดไฟล์ JSON ไปใส่ในโฟลเดอร์ data/">
+          <span>📥 ดาวน์โหลด JSON</span>
+        </button>
+        <button type="button" onclick="copyJsonToClipboard()" class="admin-btn-secondary" title="คัดลอก JSON ทั้งหมด">
+          <span>📋 คัดลอก JSON</span>
+        </button>
+        <button type="button" onclick="resetToDefaults()" class="admin-btn-danger" title="คืนค่าเป็นชุดข้อมูลตั้งต้น">
+          <span>🔄 คืนค่าเริ่มต้น</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs for Stages & System -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1" id="stageTabsBar">
+      <button type="button" onclick="switchAdminStage(1)" id="admin-tab-1" class="admin-tab active">
+        <span>🌱 ระยะที่ 1: เพาะกล้า</span>
+      </button>
+      <button type="button" onclick="switchAdminStage(2)" id="admin-tab-2" class="admin-tab">
+        <span>🌿 ระยะที่ 2: ต้นกล้า</span>
+      </button>
+      <button type="button" onclick="switchAdminStage(3)" id="admin-tab-3" class="admin-tab">
+        <span>🌸 ระยะที่ 3: เติบโต-ออกดอก</span>
+      </button>
+      <button type="button" onclick="switchAdminStage(4)" id="admin-tab-4" class="admin-tab">
+        <span>🍅 ระยะที่ 4: เก็บเกี่ยว</span>
+      </button>
+      <button type="button" onclick="switchAdminStage('system')" id="admin-tab-system" class="admin-tab">
+        <span>⚙️ ข้อมูลระบบ & โรงเรือน</span>
+      </button>
+    </div>
+
+    <!-- Main Dynamic Edit Container -->
+    <div id="admin-editor-container" class="space-y-6">
+      <!-- Populated dynamically by admin logic -->
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Feedback -->
+  <div id="admin-toast" class="admin-toast" role="alert" aria-live="polite">
+    <span class="text-xl">✅</span>
+    <span id="admin-toast-text">บันทึกข้อมูลเรียบร้อยแล้ว</span>
+  </div>
+
+  <!-- Script logic -->
+  <script src="js/admin.js"></script>
+</body>
+</html>
