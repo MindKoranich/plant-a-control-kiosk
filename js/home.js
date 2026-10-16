@@ -55,19 +55,19 @@ const STAGE_DATA = {
     cropStageLabel: 'ระยะเพาะกล้า',
     ec: '1.2',
     ph: '6.5',
-    rangeSubtitle: 'ช่วงระยะวันที่ 1–25 (วันที่ 12 ของระยะนี้)',
+    rangeSubtitle: 'ช่วงวันที่ 1–25',
     progressWidth: '8%',
     // Environmental telemetry
     temp: '24.0',
-    tempTarget: 'Target: 22–26°C',
+    tempTarget: 'เป้าหมาย: 22–26°C',
     tempStatus: '● OPTIMAL',
     tempBar: '75%',
     rh: '78',
-    rhTarget: 'RH Range: 70–80%',
+    rhTarget: 'เป้าหมาย: 70–80%',
     rhStatus: '● OPTIMAL',
     rhBar: '78%',
     vpd: '0.80',
-    vpdTarget: 'Transpiration: Gentle',
+    vpdTarget: 'คายน้ำปกติ',
     vpdStatus: '● IDEAL',
     vpdBar: '50%',
     // Plant visual styling
@@ -112,19 +112,19 @@ const STAGE_DATA = {
     cropStageLabel: 'ระยะต้นกล้า',
     ec: '1.8',
     ph: '6.0',
-    rangeSubtitle: 'ช่วงระยะวันที่ 26–50 (วันที่ 10 ของระยะนี้)',
+    rangeSubtitle: 'ช่วงวันที่ 26–50',
     progressWidth: '36%',
     // Environmental telemetry
     temp: '23.0',
-    tempTarget: 'Target: 22–25°C',
+    tempTarget: 'เป้าหมาย: 22–25°C',
     tempStatus: '● NORMAL',
     tempBar: '68%',
     rh: '68',
-    rhTarget: 'RH Range: 65–70%',
+    rhTarget: 'เป้าหมาย: 65–70%',
     rhStatus: '● OPTIMAL',
     rhBar: '68%',
     vpd: '0.92',
-    vpdTarget: 'Transpiration: Stable',
+    vpdTarget: 'คายน้ำปกติ',
     vpdStatus: '● IDEAL',
     vpdBar: '55%',
     // Plant visual styling
@@ -169,19 +169,19 @@ const STAGE_DATA = {
     cropStageLabel: 'ระยะเจริญเติบโต/ออกดอก',
     ec: '2.2',
     ph: '6.0',
-    rangeSubtitle: 'ช่วงระยะวันที่ 51–75 (วันที่ 12 ของระยะนี้)',
+    rangeSubtitle: 'ช่วงวันที่ 51–75',
     progressWidth: '64%',
     // Environmental telemetry
     temp: '22.5',
-    tempTarget: 'Target: 21–24°C',
+    tempTarget: 'เป้าหมาย: 21–24°C',
     tempStatus: '● OPTIMAL',
     tempBar: '65%',
     rh: '65',
-    rhTarget: 'RH Range: 60–70%',
+    rhTarget: 'เป้าหมาย: 60–70%',
     rhStatus: '● OPTIMAL',
     rhBar: '65%',
     vpd: '0.98',
-    vpdTarget: 'Transpiration: Active',
+    vpdTarget: 'คายน้ำปกติ',
     vpdStatus: '● IDEAL',
     vpdBar: '60%',
     // Plant visual styling
@@ -226,19 +226,19 @@ const STAGE_DATA = {
     cropStageLabel: 'ระยะสุกแก่/เก็บเกี่ยว',
     ec: '1.9',
     ph: '6.1',
-    rangeSubtitle: 'ช่วงระยะวันที่ 76–110 (วันที่ 13 ของระยะนี้)',
+    rangeSubtitle: 'ช่วงวันที่ 76–110',
     progressWidth: '92%',
     // Environmental telemetry
     temp: '21.5',
-    tempTarget: 'Target: 20–23°C',
+    tempTarget: 'เป้าหมาย: 20–23°C',
     tempStatus: '● NORMAL',
     tempBar: '60%',
     rh: '60',
-    rhTarget: 'RH Range: 55–65%',
+    rhTarget: 'เป้าหมาย: 55–65%',
     rhStatus: '● DRYING',
     rhBar: '60%',
     vpd: '1.05',
-    vpdTarget: 'Transpiration: High',
+    vpdTarget: 'คายน้ำปกติ',
     vpdStatus: '● GOOD',
     vpdBar: '68%',
     // Plant visual styling
@@ -447,7 +447,7 @@ function renderTodoList(todos, stageNum) {
 
   const progressText = document.getElementById('home-tasks-progress-text');
   if (progressText) {
-    progressText.textContent = `${doneCount} of ${totalCount} Tasks Completed (${pct}%)`;
+    progressText.textContent = `เสร็จสิ้น ${doneCount}/${totalCount} งาน (${pct}%)`;
   }
   const progressBar = document.getElementById('home-tasks-progress-bar');
   if (progressBar) {
@@ -456,11 +456,11 @@ function renderTodoList(todos, stageNum) {
   const statusBadge = document.getElementById('home-tasks-status-badge');
   if (statusBadge) {
     if (pct === 100) {
-      statusBadge.className = 'text-[12px] font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
-      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span>ALL DONE ✓';
+      statusBadge.className = 'text-[12.5px] font-thai font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
+      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span>เสร็จครบ 100%';
     } else {
-      statusBadge.className = 'text-[12px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
-      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>IN PROGRESS';
+      statusBadge.className = 'text-[12.5px] font-thai font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
+      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>กำลังดำเนินการ';
     }
   }
 

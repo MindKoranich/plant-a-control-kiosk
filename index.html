@@ -96,20 +96,20 @@
 <div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
 <div class="bg-[#2ef387] h-full w-[71%] rounded-full transition-all duration-500" id="telemetry-progress-fill" style="width: 71%;"></div>
 </div>
-<div class="flex justify-between text-[13.5px] text-neutral-200 font-medium">
-<span>ความคืบหน้ารวม</span>
-<span class="text-neutral-100 font-bold" id="telemetry-remaining">เหลือ 78 วัน</span>
+<div class="flex justify-between items-center text-[13.5px] text-neutral-300 font-medium">
+<span>ระยะเวลา</span>
+<span class="text-emerald-400 font-bold" id="telemetry-remaining">เหลือ 78 วัน</span>
 </div>
 </div>
 </div>
 <div class="glass-card p-5 h-44 flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="text-[13px] uppercase font-bold text-neutral-200 tracking-wider">CROP AGE</span>
-<span class="text-[13.5px] text-neutral-200 font-semibold" id="telemetry-crop-stage-label">ระยะต้นกล้า</span>
+<span class="text-[13px] uppercase font-bold text-neutral-200 tracking-wider">อายุพืช (CROP AGE)</span>
+<span class="hidden" id="telemetry-crop-stage-label"></span>
 </div>
 <div class="flex items-baseline space-x-2 my-1">
 <span class="text-4xl font-extrabold text-white" id="telemetry-crop-age-days">10</span>
-<span class="text-neutral-200 text-base font-bold">days</span>
+<span class="text-neutral-200 text-base font-bold">วัน</span>
 </div>
 <div class="pt-2 border-t border-[#1c2930] flex items-center justify-between text-[13.5px] text-emerald-400 font-mono font-bold">
 <span id="telemetry-ec">EC: 1.76</span>
@@ -151,7 +151,7 @@
 </div>
 <div class="my-1">
 <div class="text-3xl font-extrabold text-white"><span id="telemetry-temp-val">22.5</span><span class="text-lg font-bold text-neutral-200 ml-1">°C</span></div>
-<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-temp-target">Target: 22-25°C</div>
+<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-temp-target">เป้าหมาย: 22–25°C</div>
 </div>
 <div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
 <div class="bg-[#2ef387] h-full w-[68%] rounded-full transition-all duration-500" id="telemetry-temp-bar"></div>
@@ -164,7 +164,7 @@
 </div>
 <div class="my-1">
 <div class="text-3xl font-extrabold text-[#2ef387]"><span id="telemetry-rh-val">65</span><span class="text-lg font-bold text-neutral-200 ml-1">%</span></div>
-<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-rh-target">RH Range: 60-70%</div>
+<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-rh-target">เป้าหมาย: 60–70%</div>
 </div>
 <div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
 <div class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full w-[65%] rounded-full transition-all duration-500" id="telemetry-rh-bar"></div>
@@ -177,7 +177,7 @@
 </div>
 <div class="my-1">
 <div class="text-3xl font-extrabold text-white"><span id="telemetry-vpd-val">0.95</span><span class="text-sm font-bold text-neutral-200 ml-1">kPa</span></div>
-<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-vpd-target">Transpiration: Stable</div>
+<div class="text-[13.5px] text-[#d1e2eb] font-semibold mt-1" id="telemetry-vpd-target">การคายน้ำ: ปกติ</div>
 </div>
 <div class="w-full bg-[#1a2830] h-2 rounded-full overflow-hidden">
 <div class="bg-[#2ef387] h-full w-[55%] rounded-full transition-all duration-500" id="telemetry-vpd-bar"></div>
@@ -196,30 +196,28 @@
 <h2 class="text-xl font-bold text-white tracking-wide">TO DO LIST ประจำวัน</h2>
 <span class="text-[13.5px] font-bold text-emerald-950 bg-[#2ef387] px-3 py-0.5 rounded-full font-sans transition-all" id="tasks-stage-badge">ระยะที่ 2: ต้นกล้า</span>
 </div>
-<div class="text-[14px] text-neutral-200 font-medium mt-1 flex items-center space-x-2" id="tasks-day-subtitle">
-<span class="text-[#2ef387] font-bold text-[14.5px]" id="tasks-day-text">วันที่ 32</span>
-<span class="text-neutral-500">/</span>
-<span class="text-neutral-200">110 วันรวม</span>
+<div class="text-[14px] text-neutral-300 font-medium mt-1 flex items-center space-x-2" id="tasks-day-subtitle">
+<span class="text-[#2ef387] font-bold text-[15px]" id="tasks-day-text">วันที่ 32</span>
 <span class="text-neutral-500">•</span>
-<span class="text-neutral-200 font-medium" id="tasks-range-text">ช่วงระยะวันที่ 26–50 (วันที่ 7 ของระยะนี้)</span>
+<span class="text-neutral-300 font-medium" id="tasks-range-text">ช่วงวันที่ 26–50</span>
 </div>
 </div>
 </div>
 <div class="flex items-center space-x-2">
-<a class="text-[13.5px] font-bold text-cyan-300 hover:text-emerald-300 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=todo" id="procedures-link">ขั้นตอนปฏิบัติ (SOP) ↗</a>
-<a class="text-[13.5px] font-bold text-neutral-200 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=equip" id="equipment-link">อุปกรณ์</a>
+<a class="text-[13.5px] font-bold text-cyan-300 hover:text-emerald-300 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=todo" id="procedures-link">ขั้นตอน SOP ↗</a>
+<a class="text-[13.5px] font-bold text-neutral-200 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=equip" id="equipment-link">อุปกรณ์ ↗</a>
 </div>
 </div>
 
 <!-- Home Checklist Progress Bar (Matching design & synced with info.html) -->
 <div class="home-tasks-progress-panel rounded-xl bg-[#091318]/95 border border-[#162731] mb-3.5 shadow-inner">
   <div class="flex items-center justify-between mb-2">
-    <div class="font-mono font-bold text-[17px] text-white tracking-wide flex items-center gap-2" id="home-tasks-progress-text">
-      2 of 3 Tasks Completed (67%)
+    <div class="font-thai font-bold text-[17px] text-white tracking-wide flex items-center gap-2" id="home-tasks-progress-text">
+      เสร็จสิ้น 2/3 งาน (67%)
     </div>
-    <span class="text-[12px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5" id="home-tasks-status-badge">
+    <span class="text-[12.5px] font-thai font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5" id="home-tasks-status-badge">
       <span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>
-      IN PROGRESS
+      กำลังดำเนินการ
     </span>
   </div>
   <div class="w-full bg-[#13222a] border border-[#1c323e] h-2.5 rounded-full overflow-hidden p-0.5">

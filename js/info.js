@@ -103,7 +103,7 @@ const stageData = {
         ]
       }
     ],
-    warnTitle: "ข้อควรระวังสำคัญสำหรับระยะเพาะกล้า (Stage 1)",
+    warnTitle: "ข้อควรระวังสำคัญ: ระยะเพาะกล้า (Stage 1)",
     warns: [
       {
         title: "ระวังโรคเน่าคอดิน (Damping-off)",
@@ -238,7 +238,7 @@ const stageData = {
         ]
       }
     ],
-    warnTitle: "ข้อควรระวังสำคัญสำหรับระยะต้นกล้า (Stage 2)",
+    warnTitle: "ข้อควรระวังสำคัญ: ระยะต้นกล้า (Stage 2)",
     warns: [
       {
         title: "อย่าให้ปุ๋ยเข้มข้นเกินกำหนด (EC > 2.2)",
@@ -373,7 +373,7 @@ const stageData = {
         ]
       }
     ],
-    warnTitle: "ข้อควรระวังสำคัญสำหรับระยะออกดอกติดผล (Stage 3)",
+    warnTitle: "ข้อควรระวังสำคัญ: ระยะออกดอกติดผล (Stage 3)",
     warns: [
       {
         title: "ห้ามให้น้ำไม่สม่ำเสมอ (ขาดน้ำสลับแฉะ)",
@@ -508,7 +508,7 @@ const stageData = {
         ]
       }
     ],
-    warnTitle: "ข้อควรระวังสำคัญสำหรับระยะเก็บเกี่ยว (Stage 4)",
+    warnTitle: "ข้อควรระวังสำคัญ: ระยะเก็บเกี่ยว (Stage 4)",
     warns: [
       {
         title: "ห้ามเก็บเกี่ยวตอนผลเปียกน้ำหรือแดดจัด",
@@ -902,7 +902,7 @@ function switchStage(stageNum) {
             </span>
           </div>
           <span class="todo-step-label">
-            ขั้นตอน ${idx + 1} / ${data.todos.length}
+            ขั้นตอน ${idx + 1}/${data.todos.length}
           </span>
         </div>
         
@@ -937,7 +937,7 @@ function switchStage(stageNum) {
             </button>
             <button class="todo-detail-button" type="button" onclick="toggleTaskDetails(this)" aria-expanded="false" tabindex="0" title="คลิกเพื่อดูคู่มือ SOP ทีละขั้น">
               <span class="todo-detail-icon">＋</span>
-              <span>ดูขั้นตอน (SOP)</span>
+              <span>ดูขั้นตอน SOP</span>
             </button>
           </div>
         </div>
@@ -1394,7 +1394,6 @@ function switchStage(stageNum) {
             </div>
             <div>
               <h3 class="text-[20px] font-thai font-bold text-white leading-tight">${idx + 1}. ${cat.cat}</h3>
-              <p class="text-[14.5px] font-thai text-[#d1e2eb] mt-0.5">หมวดหมู่วัสดุ-เครื่องมือจำเป็นประจำ Stage ${stageNum}</p>
             </div>
           </div>
           <span class="text-[13.5px] font-mono font-bold px-3 py-1 rounded-full bg-bio-card2 border border-bio-line text-bio-cyan">
@@ -1770,7 +1769,7 @@ function toggleTaskDetails(btn) {
   panel.hidden = isOpen;
   btn.setAttribute('aria-expanded', String(!isOpen));
   btn.querySelector('.todo-detail-icon').textContent = isOpen ? '＋' : '−';
-  btn.querySelector('span:last-child').textContent = isOpen ? 'ดูขั้นตอน (SOP)' : 'ซ่อนขั้นตอน (SOP)';
+  btn.querySelector('span:last-child').textContent = isOpen ? 'ดูขั้นตอน SOP' : 'ซ่อนขั้นตอน SOP';
   card.classList.toggle('todo-card-expanded', !isOpen);
 }
 
@@ -1780,10 +1779,9 @@ function updateTodoProgress() {
   const doneCount = cards.filter(card => card.classList.contains('todo-card-done')).length;
   const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
 
-  // Exact match to user's specification: "X of Y Tasks Completed (Z%)"
   const progText = document.getElementById('checklist-progress-text');
   if (progText) {
-    progText.textContent = `${doneCount} of ${totalCount} Tasks Completed (${pct}%)`;
+    progText.textContent = `เสร็จสิ้น ${doneCount}/${totalCount} งาน (${pct}%)`;
   }
   const progBar = document.getElementById('checklist-progress-bar');
   if (progBar) {
@@ -1796,11 +1794,11 @@ function updateTodoProgress() {
   const syncBadge = document.getElementById('checklist-sync-badge');
   if (syncBadge) {
     if (pct === 100) {
-      syncBadge.className = 'text-[12.5px] font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-3 py-1 rounded-full flex items-center gap-1.5';
-      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>ALL COMPLETED (100%)</span>';
+      syncBadge.className = 'text-[12.5px] font-thai font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-3 py-1 rounded-full flex items-center gap-1.5';
+      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>เสร็จครบ 100%</span>';
     } else {
-      syncBadge.className = 'text-[12.5px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5';
-      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387] animate-pulse"></span><span>LIVE SYNCED</span>';
+      syncBadge.className = 'text-[12.5px] font-thai font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5';
+      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387] animate-pulse"></span><span>ซิงค์ตรงกับหน้าหลัก</span>';
     }
   }
 

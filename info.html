@@ -91,21 +91,21 @@
       <span class="kiosk-stage-pill" id="stageBadge">ระยะที่ 1: เพาะกล้า</span>
       <span class="kiosk-status-live-chip">
         <span class="w-2.5 h-2.5 rounded-full bg-bio-accent"></span>
-        <span id="cockpitLiveStatus">กำลังดำเนินการเพาะ</span>
+        <span id="cockpitLiveStatus">กำลังดำเนินการ</span>
       </span>
     </div>
     <div class="kiosk-cycle-day-box">
-      <span class="text-[13.5px] text-[#d1e2eb] font-thai font-semibold">รอบปลูกมะเขือเทศ</span>
-      <b class="text-bio-accent font-mono text-[20px]" id="stageDays">25 วัน</b>
+      <span class="text-[13px] text-[#9ab3c0] font-thai font-medium">ระยะนี้</span>
+      <b class="text-bio-accent font-mono text-[19px]" id="stageDays">25 วัน</b>
     </div>
   </div>
 
   <div class="kiosk-hero-body">
-    <h2 class="kiosk-hero-title font-thai font-bold text-white text-[22px]" id="stageTitle">
+    <h2 class="kiosk-hero-title font-thai font-bold text-white text-[21px]" id="stageTitle">
       การเพาะเมล็ด &amp; อนุบาลต้นกล้า
     </h2>
-    <p class="kiosk-hero-desc font-thai text-[15.5px] text-[#d1e2eb] mt-1.5 leading-relaxed" id="stageDesc">
-      เร่งการงอกที่สมบูรณ์ ควบคุมความชื้นสัมพัทธ์ 70–80% และเฝ้าระวังโรคเน่าคอดิน
+    <p class="kiosk-hero-desc font-thai text-[15px] text-[#b0c8d4] mt-1 leading-relaxed" id="stageDesc">
+      เร่งการงอกสมบูรณ์ ควบคุมความชื้น 70–80% และเฝ้าระวังโรคเน่าคอดิน
     </p>
   </div>
 
@@ -115,14 +115,14 @@
       <span class="kiosk-chip-icon">🗓️</span>
       <div>
         <span class="kiosk-chip-label">ความคืบหน้า</span>
-        <b class="kiosk-chip-value" id="stageProgress">วันที่ 12 / 110 วันรวม</b>
+        <b class="kiosk-chip-value" id="stageProgress">วันที่ 12 / 110</b>
       </div>
     </div>
     <div class="kiosk-cockpit-chip">
       <span class="kiosk-chip-icon">🧪</span>
       <div>
         <span class="kiosk-chip-label">EC เป้าหมาย</span>
-        <b class="kiosk-chip-value text-bio-accent" id="cockpitTargetEc">0.8–1.2 mS/cm</b>
+        <b class="kiosk-chip-value text-bio-accent" id="cockpitTargetEc">0.8–1.2</b>
       </div>
     </div>
     <div class="kiosk-cockpit-chip">
@@ -135,7 +135,7 @@
     <div class="kiosk-cockpit-chip">
       <span class="kiosk-chip-icon">🌡️</span>
       <div>
-        <span class="kiosk-chip-label">อุณหภูมิโรงเรือน</span>
+        <span class="kiosk-chip-label">อุณหภูมิเป้าหมาย</span>
         <b class="kiosk-chip-value text-amber-400" id="cockpitTargetTemp">24–28°C</b>
       </div>
     </div>
@@ -217,9 +217,9 @@
     <div class="flex items-center justify-between border-b border-bio-line/80 pb-2">
       <div class="flex items-center gap-2">
         <span class="text-base text-bio-cyan">🧭</span>
-        <h4 class="font-thai font-bold text-white text-[17px]">เกณฑ์ควบคุมสิ่งแวดล้อมและสารอาหารราก</h4>
+        <h4 class="font-thai font-bold text-white text-[17px]">เกณฑ์ควบคุมสภาพแวดล้อม</h4>
       </div>
-      <span class="text-[13px] font-mono font-bold text-[#b0c8d4] bg-bio-card2 px-2.5 py-0.5 rounded border border-bio-line">4 CRITICAL FACTORS</span>
+      <span class="text-[12.5px] font-thai font-bold text-[#b0c8d4] bg-bio-card2 px-2.5 py-0.5 rounded border border-bio-line">4 ปัจจัยหลัก</span>
     </div>
 
     <div class="grid grid-cols-4 gap-2.5" id="envMatrixContainer">
@@ -275,11 +275,11 @@
       <div class="flex items-center gap-2.5">
         <div class="w-9 h-9 rounded-xl bg-bio-accent/20 border border-bio-accent/40 text-bio-accent flex items-center justify-center font-bold text-lg">💡</div>
         <div>
-          <h4 class="font-thai font-bold text-white text-[19px]">คำแนะนำการจัดการสำหรับเกษตรกร</h4>
-          <p class="font-thai text-[14.5px] text-[#b0c8d4]" id="guideSubtitle">แนวทางปฏิบัติประจำระยะสำหรับค่า EC และ pH</p>
+          <h4 class="font-thai font-bold text-white text-[19px]">แนวทางปฏิบัติประจำระยะ</h4>
+          <p class="font-thai text-[14px] text-[#9ab3c0]" id="guideSubtitle">แนวทางปรับค่า EC และ pH ให้ตรงตามเกณฑ์</p>
         </div>
       </div>
-      <span class="px-3 py-1 rounded-full text-[13px] font-mono font-bold bg-bio-card2 border border-bio-line text-bio-cyan" id="guideStatusTag">ACTION PLAN</span>
+      <span class="px-3 py-1 rounded-full text-[12.5px] font-thai font-bold bg-bio-card2 border border-bio-line text-bio-cyan" id="guideStatusTag">แนวทางปฏิบัติ</span>
     </div>
 
     <div class="grid grid-cols-1 gap-3" id="guideCardsContainer">
@@ -290,15 +290,15 @@
             <span class="w-2.5 h-2.5 rounded-full bg-amber-400" id="guideEcDot"></span>
             <span>ความเข้มข้นปุ๋ย (EC)</span>
           </span>
-          <span class="text-[13.5px] font-mono font-bold text-amber-400 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25" id="guideEcStatus">ต่ำกว่าเป้า 0.1</span>
+          <span class="text-[13px] font-thai font-bold text-amber-400 px-3 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/25" id="guideEcStatus">ต่ำกว่าเป้า 0.1</span>
         </div>
-        <p class="font-thai text-[15.5px] text-[#d1e2eb] leading-relaxed" id="guideEcMeaning">
-          ค่า EC แสดงปริมาณเกลือแร่และธาตุอาหารทั้งหมดในน้ำปลูก หากต่ำกว่าเป้าหมาย ต้นจะได้รับไนโตรเจนและแคลเซียมไม่เพียงพอต่อการสร้างลำต้น
+        <p class="font-thai text-[15px] text-[#d1e2eb] leading-relaxed" id="guideEcMeaning">
+          ค่า EC ต่ำกว่าเกณฑ์เล็กน้อย พืชอาจได้รับธาตุอาหารไม่เพียงพอต่อการเติบโต
         </p>
         <div class="p-3.5 rounded-lg bg-bio-dark/70 border border-bio-line flex items-start gap-2.5 mt-2">
           <span class="text-bio-accent font-bold mt-0.5">👉</span>
           <p class="font-thai text-[15px] text-bio-cyan font-semibold leading-relaxed" id="guideEcAction">
-            <b>วิธีปฏิบัติทันที:</b> เติมสารละลายแม่ปุ๋ย A และ B สัดส่วนเท่ากันอย่างละ 150 ml ลงในถังจ่ายน้ำ กวนผสมให้เข้ากัน 5 นาทีแล้ววัดซ้ำ
+            <b>วิธีปฏิบัติ:</b> เติมแม่ปุ๋ย A และ B สัดส่วน 1:1 อย่างละ 150 ml ผสม 5 นาทีแล้ววัดซ้ำ
           </p>
         </div>
       </div>
@@ -310,15 +310,15 @@
             <span class="w-2.5 h-2.5 rounded-full bg-bio-accent" id="guidePhDot"></span>
             <span>ความเป็นกรด-ด่าง (pH)</span>
           </span>
-          <span class="text-[13.5px] font-mono font-bold text-bio-accent px-3 py-1 rounded-full bg-bio-accent/10 border border-bio-accent/25" id="guidePhStatus">เหมาะสมสมบูรณ์</span>
+          <span class="text-[13px] font-thai font-bold text-bio-accent px-3 py-0.5 rounded-full bg-bio-accent/10 border border-bio-accent/25" id="guidePhStatus">เหมาะสมสมบูรณ์</span>
         </div>
-        <p class="font-thai text-[15.5px] text-[#d1e2eb] leading-relaxed" id="guidePhMeaning">
-          ค่า pH ส่งผลต่อความสามารถในการดูดซึมธาตุอาหารของราก ค่า 6.0 อยู่ในจุดที่ดีที่สุด (Sweet Spot) รากดูดซึมฟอสฟอรัสและแมกนีเซียมได้เต็มที่ 100%
+        <p class="font-thai text-[15px] text-[#d1e2eb] leading-relaxed" id="guidePhMeaning">
+          ค่า pH 6.0 สมดุลดีเยี่ยม รากสามารถดูดซึมธาตุอาหารได้เต็มที่ 100%
         </p>
         <div class="p-3.5 rounded-lg bg-bio-dark/70 border border-bio-line flex items-start gap-2.5 mt-2">
           <span class="text-bio-accent font-bold mt-0.5">✓</span>
           <p class="font-thai text-[15px] text-white font-medium leading-relaxed" id="guidePhAction">
-            <b>คำแนะนำ:</b> ค่าสมดุลดีเยี่ยม รักษาระดับน้ำในถังพักและตรวจเช็กอีกครั้งในรอบบ่าย ไม่ต้องเติมสารเคมีปรับสภาพน้ำ
+            <b>คำแนะนำ:</b> รักษาระดับน้ำตามปกติ ไม่ต้องเติมสารเคมีปรับสภาพน้ำ
           </p>
         </div>
       </div>
@@ -350,28 +350,21 @@
       </div>
     </div>
 
-    <!-- Live Checklist Progress Display (Exact match to design specification) -->
+    <!-- Live Checklist Progress Display (Clean single Thai status) -->
     <div class="space-y-2.5 pt-1">
       <div class="flex items-center justify-between flex-wrap gap-2">
-        <div class="font-mono font-bold text-[19px] text-white tracking-wide flex items-center gap-2" id="checklist-progress-text">
-          2 of 3 Tasks Completed (67%)
+        <div class="font-thai font-bold text-[18px] text-white tracking-wide flex items-center gap-2" id="checklist-progress-text">
+          เสร็จสิ้น 2/3 งาน (67%)
         </div>
-        <span class="text-[12.5px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5" id="checklist-sync-badge">
+        <span class="text-[12.5px] font-thai font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5" id="checklist-sync-badge">
           <span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>
-          <span>LIVE SYNCED</span>
+          <span>ซิงค์ตรงกับหน้าหลัก</span>
         </span>
       </div>
       <div class="w-full bg-[#13222a] border border-[#1c323e] h-3 rounded-full overflow-hidden p-0.5">
         <div id="checklist-progress-bar" class="bg-[#2ef387] h-full rounded-full transition-all duration-500" style="width: 67%"></div>
       </div>
-      <div class="flex items-center justify-between text-[13.5px] font-thai pt-0.5">
-        <span class="text-[#d1e2eb] font-semibold" id="checklist-thai-summary">เสร็จแล้ว 2 จาก 3 รายการ (67%)</span>
-        <span class="text-bio-cyan font-medium flex items-center gap-1">
-          <span>แตะปุ่ม</span>
-          <b class="text-[#2ef387]">✓</b>
-          <span>เพื่อบันทึกงานที่ทำเสร็จแล้ว</span>
-        </span>
-      </div>
+      <span id="checklist-thai-summary" class="hidden"></span>
     </div>
   </div>
 
@@ -510,7 +503,7 @@
 <svg class="w-6 h-6 text-bio-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
 </svg>
-          รายการวัสดุและอุปกรณ์ที่ต้องจัดซื้อ / เตรียมใช้งาน
+          อุปกรณ์และวัสดุประจำระยะ
         </span>
 <span class="font-thai text-bio-cyan bg-bio-cyan/15 px-3 py-1 rounded-full border border-bio-cyan/35 text-sm font-bold">เช็กลิสต์อุปกรณ์</span>
 </div>
@@ -523,7 +516,6 @@
           </div>
           <div>
             <h3 class="text-[20px] font-thai font-bold text-white leading-tight">1. วัสดุเพาะและเมล็ดพันธุ์</h3>
-            <p class="text-[14.5px] font-thai text-[#d1e2eb] mt-0.5">หมวดหมู่วัสดุ-เครื่องมือจำเป็นประจำ Stage 1</p>
           </div>
         </div>
         <span class="text-[13.5px] font-mono font-bold px-3 py-1 rounded-full bg-bio-card2 border border-bio-line text-bio-cyan">
@@ -642,7 +634,6 @@
           </div>
           <div>
             <h3 class="text-[20px] font-thai font-bold text-white leading-tight">2. เครื่องมือวัดและพ่นละอองน้ำ</h3>
-            <p class="text-[14.5px] font-thai text-[#d1e2eb] mt-0.5">หมวดหมู่วัสดุ-เครื่องมือจำเป็นประจำ Stage 1</p>
           </div>
         </div>
         <span class="text-[13.5px] font-mono font-bold px-3 py-1 rounded-full bg-bio-card2 border border-bio-line text-bio-cyan">
@@ -765,15 +756,15 @@
       </div>
       <div>
         <h3 id="warnHeader" class="text-[19px] font-thai font-bold text-white leading-tight">
-          ข้อควรระวังสำคัญสำหรับระยะเพาะกล้า (Stage 1)
+          ข้อควรระวังสำคัญ: ระยะเพาะกล้า (Stage 1)
         </h3>
-        <p class="text-[14.5px] font-thai text-red-100 mt-1 leading-relaxed">
-          ตรวจพบสัญญาณเตือนให้ดำเนินการตามคำแนะนำทันทีก่อนผลผลิตเสียหาย
+        <p class="text-[14px] font-thai text-red-200 mt-1">
+          สัญญาณเตือนและแนวทางแก้ไขทันที
         </p>
       </div>
     </div>
-    <span class="text-[13px] font-mono font-bold px-3 py-1.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 flex-shrink-0">
-      CRITICAL ALERTS
+    <span class="text-[12.5px] font-thai font-bold px-3 py-1.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 flex-shrink-0">
+      จุดเฝ้าระวัง
     </span>
   </div>
 
@@ -791,15 +782,15 @@
         </div>
         <div>
           <h4 id="warnAdviceTitle" class="text-[18.5px] font-thai font-bold text-white leading-tight">
-            เกณฑ์การคัดเลือกต้นกล้าก่อนย้ายปลูก (วันที่ 18–25)
+            เกณฑ์คัดเลือกต้นกล้าก่อนย้ายปลูก (วันที่ 18–25)
           </h4>
-          <p id="warnAdviceDesc" class="text-[14.5px] font-thai text-[#d1e2eb] mt-1 leading-relaxed">
+          <p id="warnAdviceDesc" class="text-[14px] font-thai text-[#d1e2eb] mt-1 leading-relaxed">
             ต้นกล้าที่ดีต้องมีใบจริง 4–6 ใบ ลำต้นอวบหนาสีเขียวเข้ม ข้อใบสั้นกระชับ ไม่มีรอยจุดสีน้ำตาลหรือแมลงใต้ใบ
           </p>
         </div>
       </div>
-      <span class="text-[13px] font-mono font-bold px-2.5 py-1 rounded bg-bio-card2 border border-bio-line text-bio-accent flex-shrink-0">
-        QUALITY CRITERIA
+      <span class="text-[12.5px] font-thai font-bold px-3 py-1 rounded bg-bio-card2 border border-bio-line text-bio-accent flex-shrink-0">
+        เกณฑ์มาตรฐาน
       </span>
     </div>
 
