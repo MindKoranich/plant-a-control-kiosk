@@ -1405,6 +1405,12 @@ async function loadKioskDataAndApply() {
           if (s.metrics) stageData[num].metrics = s.metrics;
         }
       }
+
+      if (json && json.system && json.system.siteName) {
+        const infoLogo = document.getElementById('infoLogoTitle');
+        if (infoLogo) infoLogo.textContent = json.system.siteName;
+      }
+
       // Re-render current stage with new data from JSON
       switchStage(currentStage);
     }

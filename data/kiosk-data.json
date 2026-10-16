@@ -1,7 +1,7 @@
 {
-  "$description": "PLANT A CONTROL - ไฟล์กำหนดค่าและข้อมูลทั้งหมดของระบบ Kiosk สำหรับให้ผู้ดูแลปรับแต่งได้",
+  "$description": "Tomato OS - ไฟล์กำหนดค่าและข้อมูลทั้งหมดของระบบ Kiosk สำหรับให้ผู้ดูแลปรับแต่งได้",
   "system": {
-    "siteName": "PLANT A CONTROL",
+    "siteName": "Tomato OS",
     "chamber": "Chamber A • Greenhouse 01",
     "cropName": "Tomato Specimen 01",
     "cropVariety": "Cherry Tomato Premium (มะเขือเทศเชอร์รี่)",

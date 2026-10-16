@@ -561,6 +561,12 @@ async function loadKioskDataAndApply() {
           }
         }
       }
+
+      if (json && json.system && json.system.siteName) {
+        const logoTitle = document.getElementById('siteLogoTitle');
+        if (logoTitle) logoTitle.textContent = json.system.siteName;
+      }
+
       // Re-render current stage with new data from JSON
       selectStage(currentActiveStage);
     }

@@ -1,4 +1,4 @@
-# PLANT A CONTROL — Tomato Kiosk (2 pages)
+# Tomato OS — Smart Tomato Cultivation Kiosk (2 pages)
 
 โปรเจกต์นี้เป็นหน้าจอ Kiosk ขนาด 800×1280 สำหรับระบบควบคุมการปลูกมะเขือเทศ แยกเป็นไฟล์ HTML/CSS/JS พร้อมเปิดใน VS Code
 

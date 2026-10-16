@@ -1,6 +1,6 @@
 # 📖 คู่มือการแก้ไขข้อมูล Kiosk ผ่านไฟล์ `data/kiosk-data.json`
 
-ไฟล์ [data/kiosk-data.json](file:///Users/m/Downloads/plant-a-control-kiosk/data/kiosk-data.json) ถูกออกแบบมาเป็น **จุดศูนย์กลางของข้อมูล (Single Source of Truth)** ทั้งหมดของระบบตู้คีออส `PLANT A CONTROL` เพื่อให้ผู้ดูแลแปลงปลูกหรือผู้พัฒนาต่อสามารถแก้ไขข้อมูลได้อย่างสะดวกรวดเร็ว โดยไม่ต้องแตะต้องโค้ด HTML หรือ JavaScript
+ไฟล์ [data/kiosk-data.json](file:///Users/m/Downloads/plant-a-control-kiosk/data/kiosk-data.json) ถูกออกแบบมาเป็น **จุดศูนย์กลางของข้อมูล (Single Source of Truth)** ทั้งหมดของระบบตู้คีออส `Tomato OS` เพื่อให้ผู้ดูแลแปลงปลูกหรือผู้พัฒนาต่อสามารถแก้ไขข้อมูลได้อย่างสะดวกรวดเร็ว โดยไม่ต้องแตะต้องโค้ด HTML หรือ JavaScript
 
 ---
 
@@ -25,7 +25,7 @@
 ### 1. ข้อมูลระบบภาพรวม (`system`)
 | คีย์ (Key) | คำอธิบาย | ตัวอย่างค่า |
 |---|---|---|
-| `siteName` | ชื่อระบบ/สถานี | `"PLANT A CONTROL"` |
+| `siteName` | ชื่อระบบ/สถานี | `"Tomato OS"` |
 | `chamber` | ชื่อโรงเรือน/ห้องควบคุม | `"Chamber A • Greenhouse 01"` |
 | `cropName` | รหัสสายพันธุ์ตัวอย่าง | `"Tomato Specimen 01"` |
 | `cropVariety` | ชื่อสายพันธุ์พืชที่ปลูก | `"Cherry Tomato Premium"` |

@@ -93,7 +93,7 @@ async function loadAdminData() {
   if (!activeData) {
     activeData = {
       system: {
-        siteName: 'PLANT A CONTROL',
+        siteName: 'Tomato OS',
         chamber: 'Chamber A • Greenhouse 01',
         cropName: 'Tomato Specimen 01',
         cropVariety: 'Cherry Tomato Premium',
@@ -446,7 +446,7 @@ function renderSystemEditor(container) {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="admin-label">ชื่อสถานี / ระบบ (Site Name)</label>
-          <input type="text" id="edit-sys-site" class="admin-input font-bold" value="${sys.siteName || 'PLANT A CONTROL'}">
+          <input type="text" id="edit-sys-site" class="admin-input font-bold" value="${sys.siteName || 'Tomato OS'}">
         </div>
         <div>
           <label class="admin-label">โรงเรือน / ห้องควบคุม (Chamber)</label>
