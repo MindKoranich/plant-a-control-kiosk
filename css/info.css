@@ -1384,13 +1384,74 @@ main>.glass-panel:first-child {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   transition: all 0.2s ease;
 }
 
 .kiosk-equip-card:hover {
   border-color: rgba(46, 243, 135, 0.4);
   transform: translateY(-1px);
+}
+
+.kiosk-equip-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kiosk-equip-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(14, 27, 34, 0.95) 0%, rgba(8, 16, 21, 0.98) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  padding: 6px;
+  transition: all 0.25s ease;
+}
+
+.kiosk-equip-icon-box svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kiosk-equip-card:hover .kiosk-equip-icon-box {
+  transform: translateY(-2px);
+}
+
+.kiosk-equip-card:hover .kiosk-equip-icon-box svg {
+  transform: scale(1.08);
+}
+
+.kiosk-equip-icon-box-green {
+  border: 1px solid rgba(46, 243, 135, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 0 14px rgba(46, 243, 135, 0.12);
+}
+
+.kiosk-equip-icon-box-cyan {
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 0 14px rgba(34, 211, 238, 0.12);
+}
+
+.kiosk-equip-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.kiosk-equip-cat-pill {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ab3c0;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
 .kiosk-equip-top {
@@ -1401,7 +1462,7 @@ main>.glass-panel:first-child {
 
 .kiosk-equip-index {
   font-family: 'Space Mono', monospace;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   color: #9ab3c0;
   background: #080f13;

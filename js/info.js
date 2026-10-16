@@ -945,7 +945,397 @@ function switchStage(stageNum) {
     }).join('');
   }
 
-  // 2. Render Equipments with big readable typography and specs
+  // ==========================================================================
+  // EQUIPMENT VISUAL SVG ICONS RESOLVER (High-contrast Agronomic Vector Graphics)
+  // ==========================================================================
+  function getEquipmentSvg(name, catIdx, itemIdx) {
+    const n = (name || '').toLowerCase();
+
+    // 1. Seeds & Sprouting (เมล็ดพันธุ์)
+    if (n.includes('เมล็ด')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="21" fill="#0b2016" stroke="#2ef387" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <path d="M24 37c-5.5-4.5-9.5-11-9.5-17.5a9.5 9.5 0 0119 0C33.5 26 29.5 32.5 24 37z" fill="#143e2a" stroke="#2ef387" stroke-width="2"/>
+        <path d="M24 19v12" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <path d="M24 22c2.5-3.5 6-4.5 9-3-1 3.5-3.5 5.5-9 5.5" fill="#2ef387" fill-opacity="0.7" stroke="#2ef387" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="13" r="2.5" fill="#fbbf24"/>
+      </svg>`;
+    }
+
+    // 2. Seedling Tray (ถาดเพาะกล้า)
+    if (n.includes('ถาดเพาะ') || n.includes('หลุม')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="8" width="36" height="32" rx="4" fill="#091b24" stroke="#22d3ee" stroke-width="2"/>
+        <line x1="6" y1="18" x2="42" y2="18" stroke="#16374a" stroke-width="1.5"/>
+        <line x1="6" y1="28" x2="42" y2="28" stroke="#16374a" stroke-width="1.5"/>
+        <line x1="18" y1="8" x2="18" y2="40" stroke="#16374a" stroke-width="1.5"/>
+        <line x1="30" y1="8" x2="30" y2="40" stroke="#16374a" stroke-width="1.5"/>
+        <circle cx="12" cy="13" r="2.5" fill="#2ef387"/>
+        <circle cx="24" cy="13" r="2.5" fill="#2ef387"/>
+        <circle cx="36" cy="13" r="2.5" fill="#2ef387"/>
+        <circle cx="12" cy="23" r="2.5" fill="#2ef387"/>
+        <circle cx="24" cy="23" r="2.5" fill="#2ef387"/>
+        <circle cx="36" cy="23" r="2.5" fill="#2ef387"/>
+        <circle cx="12" cy="34" r="2.5" fill="#2ef387"/>
+        <circle cx="24" cy="34" r="2.5" fill="#2ef387"/>
+        <circle cx="36" cy="34" r="2.5" fill="#2ef387"/>
+      </svg>`;
+    }
+
+    // 3. Peat Moss (พีทมอส)
+    if (n.includes('พีทมอส')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 14l4-8h16l4 8v24a4 4 0 01-4 4H16a4 4 0 01-4-4V14z" fill="#1b2316" stroke="#84cc16" stroke-width="2"/>
+        <path d="M20 28c0-5 4-8 4-8s4 3 4 8a4 4 0 01-8 0z" fill="#65a30d" stroke="#84cc16" stroke-width="1.8"/>
+        <line x1="15" y1="14" x2="33" y2="14" stroke="#84cc16" stroke-width="1.5"/>
+        <circle cx="24" cy="38" r="2" fill="#84cc16"/>
+      </svg>`;
+    }
+
+    // 4. Coconut Coir (ขุยมะพร้าว)
+    if (n.includes('ขุยมะพร้าว') || n.includes('ขุย')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 24c0-7.7 6.3-14 14-14s14 6.3 14 14-6.3 14-14 14S10 31.7 10 24z" fill="#251b14" stroke="#d97706" stroke-width="2"/>
+        <path d="M14 24c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 3"/>
+        <circle cx="24" cy="24" r="3.5" fill="#22d3ee"/>
+        <path d="M18 20l2 2m8-2l-2 2m-4 6l1 2m6-1l-1 2" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 5. Thermometer (เทอร์โมมิเตอร์วัดน้ำ)
+    if (n.includes('เทอร์โมมิเตอร์') || n.includes('วัดน้ำ')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="19" y="6" width="10" height="24" rx="5" fill="#0e232d" stroke="#22d3ee" stroke-width="2"/>
+        <circle cx="24" cy="34" r="7" fill="#ef4444" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="22.5" y="14" width="3" height="16" fill="#ef4444" rx="1.5"/>
+        <path d="M24 39v5m-3-1h6" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+        <path d="M33 13h5m-3 5h3m-5 5h5" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="34" r="2.5" fill="#ffffff"/>
+      </svg>`;
+    }
+
+    // 6. Mist Sprayer (กระบอกพ่นละอองฝอยแรงดัน)
+    if (n.includes('กระบอกพ่น') || n.includes('ละอองฝอย') || n.includes('ฟ็อกกี้')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 20h16l-2 22H18l-2-22z" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="21" y="14" width="6" height="6" fill="#1b3d4f" stroke="#22d3ee" stroke-width="1.5"/>
+        <path d="M27 14h-5V8h6a4 4 0 014 4v2h-5z" fill="#1b4d36" stroke="#2ef387" stroke-width="2"/>
+        <path d="M17 11H9" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="6" cy="8" r="1.5" fill="#22d3ee"/>
+        <circle cx="4" cy="11" r="1.5" fill="#22d3ee"/>
+        <circle cx="6" cy="14" r="1.5" fill="#22d3ee"/>
+        <circle cx="2" cy="11" r="1" fill="#22d3ee"/>
+      </svg>`;
+    }
+
+    // 7. Thermo-Hygrometer (เครื่องวัดความชื้นสัมพัทธ์)
+    if (n.includes('ความชื้น') || n.includes('ไฮโกร')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="10" width="32" height="28" rx="5" fill="#091820" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="13" y="15" width="22" height="12" rx="2" fill="#132c3a"/>
+        <path d="M16 22h4m3 0h9" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="18" cy="33" r="2.5" fill="#22d3ee"/>
+        <circle cx="24" cy="33" r="2.5" fill="#2ef387"/>
+        <circle cx="30" cy="33" r="2.5" fill="#fbbf24"/>
+        <line x1="24" y1="6" x2="24" y2="10" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 8. Shade Net (สแลนพรางแสง)
+    if (n.includes('สแลน') || n.includes('พรางแสง')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="14" r="6" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/>
+        <path d="M16 4v3m0 14v3m-10-10h3m14 0h3" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+        <rect x="16" y="22" width="26" height="20" rx="3" fill="#0b241b" stroke="#2ef387" stroke-width="2"/>
+        <line x1="16" y1="28" x2="42" y2="28" stroke="#2ef387" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="16" y1="35" x2="42" y2="35" stroke="#2ef387" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="24" y1="22" x2="24" y2="42" stroke="#2ef387" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="33" y1="22" x2="33" y2="42" stroke="#2ef387" stroke-width="1.5" stroke-dasharray="2 2"/>
+      </svg>`;
+    }
+
+    // 9. Trellis Twine (เชือกโยงค้าง)
+    if (n.includes('เชือก') || n.includes('ค้าง')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="14" rx="12" ry="5.5" fill="#14303f" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M12 14v16c0 3 5.4 5.5 12 5.5s12-2.5 12-5.5V14" fill="#0f2430" stroke="#22d3ee" stroke-width="2"/>
+        <ellipse cx="24" cy="30" rx="12" ry="5.5" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="2 3"/>
+        <line x1="12" y1="22" x2="36" y2="22" stroke="#2ef387" stroke-width="1.5"/>
+        <path d="M36 22c6 0 8-7 8-14" stroke="#2ef387" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 10. Plant Vine Clips (คลิปหนีบต้น)
+    if (n.includes('คลิปหนีบ') || (n.includes('คลิป') && !n.includes('พยุง'))) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="22" r="13" fill="#0e232e" stroke="#2ef387" stroke-width="2"/>
+        <circle cx="24" cy="22" r="7.5" fill="#07131a" stroke="#22d3ee" stroke-width="1.5"/>
+        <path d="M17 33l-4 9m18-9l4 9" stroke="#2ef387" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="24" cy="9" r="2.5" fill="#fbbf24"/>
+        <line x1="24" y1="15" x2="24" y2="29" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 11. Pruning Shears (กรรไกรตัดแต่งกิ่ง)
+    if (n.includes('กรรไกรตัดแต่ง') || (n.includes('กรรไกร') && !n.includes('เก็บเกี่ยว'))) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="22" r="3" fill="#fbbf24"/>
+        <path d="M24 22L36 7c2 4 1 9-2 12l-10 3z" fill="#162e3b" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M24 22L38 16c0 4-2 8-5 10l-9-4z" fill="#1b4d36" stroke="#2ef387" stroke-width="2"/>
+        <path d="M24 22L14 36c-3 3-8 3-10 0s0-7 3-10l7-4" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M24 22L18 41c-2 3-6 4-9 2s-2-7 1-9l6-12" stroke="#2ef387" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 12. Yellow Sticky Trap (แผ่นกาวดักแมลง)
+    if (n.includes('แผ่นกาว') || n.includes('ดักแมลง')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="7" width="24" height="27" rx="3" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+        <line x1="24" y1="34" x2="24" y2="44" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="17" cy="15" r="1.8" fill="#1e293b"/>
+        <circle cx="29" cy="17" r="2.2" fill="#1e293b"/>
+        <circle cx="21" cy="25" r="2" fill="#1e293b"/>
+        <circle cx="30" cy="27" r="1.6" fill="#1e293b"/>
+        <path d="M12 12h24M12 21h24M12 29h24" stroke="#b45309" stroke-width="0.8" stroke-opacity="0.4"/>
+      </svg>`;
+    }
+
+    // 13. Fertilizer (ปุ๋ยไนโตรเจน-แคลเซียม)
+    if (n.includes('ไนโตรเจน') || (n.includes('ปุ๋ย') && !n.includes('โพแทสเซียม'))) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 8h10v6l6 14a4 4 0 01-3.6 5.6H16.6A4 4 0 0113 28l6-14V8z" fill="#0d241c" stroke="#2ef387" stroke-width="2"/>
+        <line x1="17" y1="8" x2="31" y2="8" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <path d="M15 27c2-1 5-2 9-2s7 1 9 2" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="21" cy="21" r="2" fill="#2ef387" fill-opacity="0.8"/>
+        <circle cx="27" cy="19" r="1.5" fill="#2ef387" fill-opacity="0.6"/>
+        <circle cx="24" cy="27" r="2.5" fill="#2ef387"/>
+      </svg>`;
+    }
+
+    // 14. Water Conditioner (สารปรับปรุงสภาพน้ำ)
+    if (n.includes('ปรับปรุงสภาพน้ำ') || n.includes('สารจับใบ')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="16" y="14" width="16" height="26" rx="4" fill="#0e232d" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="20" y="8" width="8" height="6" fill="#1b3d4f" stroke="#22d3ee" stroke-width="1.5"/>
+        <path d="M24 20c-3 4-5 6.5-5 9a5 5 0 0010 0c0-2.5-2-5-5-9z" fill="#22d3ee" fill-opacity="0.4" stroke="#22d3ee" stroke-width="1.5"/>
+        <path d="M36 22l3 3-3 3m-24 0l-3-3 3-3" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 15. EC/pH Meter (มิเตอร์ EC/pH โพรบแก้ว)
+    if (n.includes('มิเตอร์') || n.includes('โพรบแก้ว') || n.includes('ec/ph')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="17" y="6" width="14" height="28" rx="4" fill="#0b171e" stroke="#2ef387" stroke-width="2"/>
+        <rect x="20" y="11" width="8" height="8" rx="2" fill="#152b36"/>
+        <text x="24" y="17" font-size="5" fill="#2ef387" font-family="monospace" text-anchor="middle" font-weight="bold">1.8</text>
+        <circle cx="24" cy="24" r="2" fill="#22d3ee"/>
+        <path d="M21 34l3 8 3-8z" fill="#22d3ee" fill-opacity="0.3" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="24" cy="40" r="1.5" fill="#2ef387"/>
+      </svg>`;
+    }
+
+    // 16. Nitrile Gloves (ถุงมือการเกษตร)
+    if (n.includes('ถุงมือการเกษตร') || n.includes('ไนไตรล์')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 38v-8l-3-4a3 3 0 011-4l3 3V12a2 2 0 014 0v10h1V8a2 2 0 014 0v14h1V10a2 2 0 014 0v12h1v-7a2 2 0 014 0v13c0 6-5 10-11 10H16z" fill="#102936" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M16 38h15v4H16z" fill="#2ef387" stroke="#2ef387" stroke-width="1.5"/>
+      </svg>`;
+    }
+
+    // 17. Truss Support Clips (คลิปพยุงช่อผล)
+    if (n.includes('พยุงช่อ') || n.includes('truss')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 12c0-4 4-6 8-6s8 2 8 6v12c0 6-4 10-10 10s-8-3-8-7 3-6 7-6h11" stroke="#2ef387" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="28" cy="27" r="4.5" fill="#ef4444" stroke="#2ef387" stroke-width="1.5"/>
+        <circle cx="34" cy="24" r="3.5" fill="#dc2626"/>
+      </svg>`;
+    }
+
+    // 18. Pollinator Wand (เครื่องสั่นช่วยผสมเกสร)
+    if (n.includes('ผสมเกสร') || n.includes('สั่น')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="8" height="22" rx="4" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <line x1="24" y1="20" x2="24" y2="7" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="24" cy="7" r="2.5" fill="#fbbf24"/>
+        <path d="M16 9c-3 2-3 6 0 8m16-8c3 2 3 6 0 8" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="24" cy="28" r="2" fill="#2ef387"/>
+      </svg>`;
+    }
+
+    // 19. Foliar Spray Tank (ถังฉีดพ่นฮอร์โมน)
+    if (n.includes('ถังฉีด') || n.includes('ถังพ่น')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="13" y="14" width="18" height="26" rx="6" fill="#132c3a" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M22 6v8m-4-8h8" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <path d="M31 32c4 0 6-2 6-6V13l-6 11" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="37" y1="13" x2="43" y2="7" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="22" cy="25" r="3" fill="#2ef387"/>
+      </svg>`;
+    }
+
+    // 20. Vernier Caliper (เวอร์เนียร์คาลิปเปอร์)
+    if (n.includes('เวอร์เนียร์') || n.includes('คาลิปเปอร์')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="18" width="36" height="7" rx="1.5" fill="#142c38" stroke="#22d3ee" stroke-width="1.8"/>
+        <path d="M12 14v16m0-16h4v5h-4" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <path d="M26 14v16m0-16h4v5h-4" stroke="#2ef387" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="20" cy="29" r="6" fill="#ef4444" fill-opacity="0.8" stroke="#2ef387" stroke-width="1.5"/>
+        <line x1="16" y1="18" x2="32" y2="18" stroke="#22d3ee" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+      </svg>`;
+    }
+
+    // 21. Calcium-Boron (แคลเซียม-โบรอน)
+    if (n.includes('แคลเซียม') || n.includes('โบรอน')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="16" y="14" width="16" height="26" rx="4" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="20" y="8" width="8" height="6" fill="#1c3e4f" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="24" cy="26" r="6" fill="#2ef387" fill-opacity="0.25" stroke="#2ef387" stroke-width="1.5"/>
+        <text x="24" y="28.5" font-size="6" fill="#2ef387" font-family="sans-serif" text-anchor="middle" font-weight="bold">Ca</text>
+        <circle cx="33" cy="18" r="2.5" fill="#fbbf24"/>
+      </svg>`;
+    }
+
+    // 22. Potassium Fertilizer (ปุ๋ยโพแทสเซียม)
+    if (n.includes('โพแทสเซียม')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12l4-6h16l4 6v26a4 4 0 01-4 4H16a4 4 0 01-4-4V12z" fill="#221e10" stroke="#fbbf24" stroke-width="2"/>
+        <circle cx="24" cy="26" r="8" fill="#d97706" fill-opacity="0.4" stroke="#fbbf24" stroke-width="1.8"/>
+        <text x="24" y="30" font-size="10" fill="#fbbf24" font-family="sans-serif" text-anchor="middle" font-weight="900">K</text>
+        <path d="M18 12h12" stroke="#fbbf24" stroke-width="1.5"/>
+      </svg>`;
+    }
+
+    // 23. Bio-Agent / Trichoderma (เชื้อราไตรโคเดอร์มา)
+    if (n.includes('ไตรโคเดอร์มา') || n.includes('บิวเวอเรีย') || n.includes('ชีวภัณฑ์')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="16" fill="#0d241c" stroke="#2ef387" stroke-width="2"/>
+        <circle cx="24" cy="24" r="6" fill="#1b4d36" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="17" cy="18" r="2.5" fill="#2ef387"/>
+        <circle cx="31" cy="18" r="2.5" fill="#2ef387"/>
+        <circle cx="20" cy="30" r="2.5" fill="#2ef387"/>
+        <circle cx="28" cy="30" r="2.5" fill="#2ef387"/>
+        <path d="M24 18v12M18 24h12" stroke="#22d3ee" stroke-width="1" stroke-dasharray="2 2"/>
+      </svg>`;
+    }
+
+    // 24. Safety Gear (แว่นตานิรภัยและหน้ากากกรอง)
+    if (n.includes('แว่นตา') || n.includes('หน้ากาก')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 13h24a4 4 0 014 4v2a6 6 0 01-6 6H14a6 6 0 01-6-6v-2a4 4 0 014-4z" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <circle cx="18" cy="19" r="4" fill="#22d3ee" fill-opacity="0.3"/>
+        <circle cx="30" cy="19" r="4" fill="#22d3ee" fill-opacity="0.3"/>
+        <path d="M16 27h16l-3 13H19l-3-13z" fill="#1b3c2c" stroke="#2ef387" stroke-width="2"/>
+        <circle cx="14" cy="33" r="3" fill="#12251c" stroke="#2ef387" stroke-width="1.5"/>
+        <circle cx="34" cy="33" r="3" fill="#12251c" stroke="#2ef387" stroke-width="1.5"/>
+      </svg>`;
+    }
+
+    // 25. Harvesting Shears (กรรไกรเก็บเกี่ยว)
+    if (n.includes('เก็บเกี่ยว') && n.includes('กรรไกร')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="3" fill="#fbbf24"/>
+        <path d="M24 24L38 12c1 3 0 7-3 9l-11 3z" fill="#152b36" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M24 24L37 18c0 4-2 7-5 8l-8-2z" fill="#1b4d36" stroke="#2ef387" stroke-width="2"/>
+        <path d="M24 24L15 36c-2 2-6 2-8 0s0-5 2-7l7-5" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M24 24L18 39c-2 2-5 3-7 1s-1-5 1-7l6-9" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="37" cy="12" r="2" fill="#22d3ee"/>
+      </svg>`;
+    }
+
+    // 26. Harvest Crate (ตะกร้าพลาสติกโปร่ง)
+    if (n.includes('ตะกร้า') || n.includes('ลัง')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 19h32l-3 19H11L8 19z" fill="#0f2533" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M6 19h36v-3a2 2 0 00-2-2H8a2 2 0 00-2 2v3z" fill="#193b4f" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="18" cy="15" r="4.5" fill="#ef4444"/>
+        <circle cx="24" cy="13" r="5" fill="#dc2626"/>
+        <circle cx="30" cy="15" r="4.5" fill="#ef4444"/>
+        <path d="M18 11l1-2m5 1l0-2m6 3l-1-2" stroke="#2ef387" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="14" y1="23" x2="14" y2="34" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="24" y1="23" x2="24" y2="34" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="34" y1="23" x2="34" y2="34" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    // 27. Digital Scale (เครื่องชั่งดิจิทัล)
+    if (n.includes('เครื่องชั่ง') || n.includes('ชั่งน้ำหนัก')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="24" width="32" height="16" rx="4" fill="#0c1a22" stroke="#2ef387" stroke-width="2"/>
+        <rect x="6" y="16" width="36" height="8" rx="2" fill="#183645" stroke="#22d3ee" stroke-width="1.5"/>
+        <rect x="16" y="28" width="16" height="7" rx="1.5" fill="#071116"/>
+        <text x="24" y="33.5" font-size="5" fill="#2ef387" font-family="monospace" text-anchor="middle" font-weight="bold">30.0 kg</text>
+      </svg>`;
+    }
+
+    // 28. Soft Cotton Gloves (ถุงมือผ้าสะอาด)
+    if (n.includes('ถุงมือผ้า') || n.includes('ถุงมือ')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 38v-8l-3-4a3 3 0 011-4l3 3V12a2 2 0 014 0v10h1V8a2 2 0 014 0v14h1V10a2 2 0 014 0v12h1v-7a2 2 0 014 0v13c0 6-5 10-11 10H16z" fill="#1e293b" stroke="#e2e8f0" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M16 38h15v4H16z" fill="#2ef387" stroke="#2ef387" stroke-width="1.5"/>
+      </svg>`;
+    }
+
+    // 29. Corrugated Box (กล่องกระดาษลูกฟูก)
+    if (n.includes('กล่อง') || n.includes('ลูกฟูก')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 16l16-8 16 8v20l-16 8L8 36V16z" fill="#1b2520" stroke="#f59e0b" stroke-width="2"/>
+        <path d="M8 16l16 8 16-8M24 24v20" stroke="#f59e0b" stroke-width="1.8"/>
+        <circle cx="24" cy="33" r="3" fill="#ef4444"/>
+      </svg>`;
+    }
+
+    // 30. Foam Mesh (โฟมตาข่ายกันกระแทก)
+    if (n.includes('โฟม') || n.includes('ตาข่าย')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="24" rx="14" ry="17" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <path d="M14 16l20 16m-20 0l20-16m-18 8h16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="5" fill="#ef4444"/>
+      </svg>`;
+    }
+
+    // 31. Disinfectant (น้ำยาฆ่าเชื้อ)
+    if (n.includes('ฆ่าเชื้อ') || n.includes('ทำความสะอาด')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="15" width="18" height="25" rx="4" fill="#0f2633" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="20" y="8" width="8" height="7" fill="#1c3e4f" stroke="#22d3ee" stroke-width="1.5"/>
+        <path d="M24 22v11m-5.5-5.5h11" stroke="#2ef387" stroke-width="3" stroke-linecap="round"/>
+        <path d="M35 12l2 2-2 2-2-2zM38 24l1.5 1.5-1.5 1.5-1.5-1.5z" fill="#fbbf24"/>
+      </svg>`;
+    }
+
+    // 32. Tablet (แท็บเล็ตบันทึกข้อมูล)
+    if (n.includes('แท็บเล็ต') || n.includes('บันทึก')) {
+      return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="8" width="28" height="32" rx="4" fill="#0a141b" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="14" y="12" width="20" height="22" rx="2" fill="#102530"/>
+        <path d="M17 28l4-5 4 3 5-7" stroke="#2ef387" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="37" r="1.5" fill="#22d3ee"/>
+      </svg>`;
+    }
+
+    // 33. Fallback High-Tech Tool SVG
+    return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="28" height="28" rx="6" fill="#0f2430" stroke="${catIdx === 0 ? '#2ef387' : '#22d3ee'}" stroke-width="2"/>
+      <circle cx="24" cy="24" r="7" fill="${catIdx === 0 ? '#1b4d36' : '#14384a'}" stroke="${catIdx === 0 ? '#2ef387' : '#22d3ee'}" stroke-width="1.5"/>
+      <path d="M24 13v4m0 14v4m-11-11h4m14 0h4" stroke="${catIdx === 0 ? '#2ef387' : '#22d3ee'}" stroke-width="2" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  function getEquipmentTag(name, catTitle) {
+    const n = (name || '').toLowerCase();
+    if (n.includes('เมล็ด') || n.includes('พีทมอส') || n.includes('ขุย') || n.includes('ถาดเพาะ')) return '🌱 วัสดุเพาะปลูก';
+    if (n.includes('เทอร์โม') || n.includes('เครื่องวัด') || n.includes('มิเตอร์') || n.includes('เวอร์เนียร์') || n.includes('เครื่องชั่ง') || n.includes('แท็บเล็ต')) return '⚡ เครื่องมือดิจิทัล';
+    if (n.includes('พ่น') || n.includes('กระบอก') || n.includes('ถัง') || n.includes('กรรไกร') || n.includes('สั่น')) return '🛠️ เครื่องมือแปลงปลูก';
+    if (n.includes('สแลน') || n.includes('เชือก') || n.includes('คลิป')) return '🏗️ ระบบค้างและพรางแสง';
+    if (n.includes('ปุ๋ย') || n.includes('แคลเซียม') || n.includes('โพแทสเซียม') || n.includes('ปรับปรุง')) return '🧪 ธาตุอาหารพืช';
+    if (n.includes('แผ่นกาว') || n.includes('ชีวภัณฑ์') || n.includes('ไตรโคเดอร์มา')) return '🛡️ อารักขาพืช';
+    if (n.includes('ถุงมือ') || n.includes('แว่นตา') || n.includes('หน้ากาก')) return '🥽 ความปลอดภัย';
+    if (n.includes('ตะกร้า') || n.includes('กล่อง') || n.includes('โฟม')) return '📦 จัดการผลผลิต';
+    if (n.includes('ฆ่าเชื้อ') || n.includes('ทำความสะอาด')) return '✨ สุขอนามัยแปลง';
+    return '⚙️ อุปกรณ์จำเป็น';
+  }
+
+  // 2. Render Equipments with visual SVG illustrations and specs
   const equipContainer = document.getElementById('equipContainer');
   if (equipContainer) {
     equipContainer.innerHTML = data.equips.map((cat, idx) => `
@@ -967,9 +1357,17 @@ function switchStage(stageNum) {
         <div class="grid grid-cols-2 gap-3.5">
           ${cat.items.map((item, itemIdx) => `
             <div class="kiosk-equip-card">
-              <div class="kiosk-equip-top">
-                <span class="kiosk-equip-index">ITEM ${String(itemIdx + 1).padStart(2, '0')}</span>
-                <span class="w-2.5 h-2.5 rounded-full ${idx === 0 ? 'bg-bio-accent shadow-[0_0_8px_rgba(46,243,135,0.8)]' : 'bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)]'}"></span>
+              <div class="kiosk-equip-header">
+                <div class="kiosk-equip-icon-box ${idx === 0 ? 'kiosk-equip-icon-box-green' : 'kiosk-equip-icon-box-cyan'}">
+                  ${item.svg || getEquipmentSvg(item.name, idx, itemIdx)}
+                </div>
+                <div class="kiosk-equip-meta">
+                  <div class="kiosk-equip-top">
+                    <span class="kiosk-equip-index">ITEM ${String(itemIdx + 1).padStart(2, '0')}</span>
+                    <span class="w-2.5 h-2.5 rounded-full ${idx === 0 ? 'bg-bio-accent shadow-[0_0_8px_rgba(46,243,135,0.8)]' : 'bg-bio-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)]'}"></span>
+                  </div>
+                  <span class="kiosk-equip-cat-pill font-thai">${getEquipmentTag(item.name, cat.cat)}</span>
+                </div>
               </div>
               <div class="kiosk-equip-name font-thai">${item.name}</div>
               <div class="kiosk-equip-spec font-thai">${item.detail}</div>
