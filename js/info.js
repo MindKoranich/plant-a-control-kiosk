@@ -1371,10 +1371,6 @@ function switchStage(stageNum) {
               </div>
               <div class="kiosk-equip-name font-thai">${item.name}</div>
               <div class="kiosk-equip-spec font-thai">${item.detail}</div>
-              <div class="kiosk-equip-tip font-thai">
-                <span>💡</span>
-                <span>ตรวจสอบสเปกก่อนนำเข้าแปลง</span>
-              </div>
             </div>
           `).join('')}
         </div>

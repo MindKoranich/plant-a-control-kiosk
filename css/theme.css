@@ -723,13 +723,15 @@ body.theme-day .kiosk-equip-name {
 }
 
 body.theme-day .kiosk-equip-spec {
-  color: #475569 !important;
+  color: #334155 !important;
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
 }
 
-body.theme-day .kiosk-equip-tip {
-  background: #f0fdf4 !important;
-  border-color: #bbf7d0 !important;
-  color: #166534 !important;
+body.theme-day .kiosk-equip-cat-pill {
+  color: #0284c7 !important;
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.25) !important;
 }
 
 /* View 3: Hazard & Benchmark Cards (info.html) */
