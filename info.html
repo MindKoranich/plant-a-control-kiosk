@@ -29,65 +29,38 @@
     <time id="info-current-time">10:48</time>
   </div>
 </header>
-<!-- STAGE SELECTOR TABS -->
-<section class="px-7 pt-4 pb-2 z-10">
-  <div class="text-[15px] font-bold text-bio-cyan uppercase tracking-wider mb-2.5 flex items-center justify-between font-thai">
-    <span class="flex items-center gap-2">
-      <span class="w-2.5 h-2.5 rounded-full bg-bio-cyan"></span>
-      GROWTH STAGES
-    </span>
-    <span class="font-mono text-bio-muted text-sm bg-bio-card px-3.5 py-1 rounded-full border border-bio-line font-bold">รอบปลูก 110 วัน</span>
-  </div>
-
-  <div class="relative flex items-center justify-between px-2" id="stageTabs" role="tablist" aria-label="เลือกระยะการเจริญเติบโต">
-    <div class="absolute left-10 right-10 top-1/2 h-1 -translate-y-1/2 rounded-full bg-bio-line/80"></div>
-    <div class="absolute left-10 top-1/2 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-bio-accent to-bio-cyan transition-all duration-300" id="stageProgressTrack" style="width: 28%;"></div>
-
-    <button class="stage-tab glass-panel-active" id="stageBtn-1" role="tab" aria-selected="true" tabindex="0" onclick="switchStage(1)">
-      <div class="stage-node stage-node-active">
-        <span class="stage-node-mark">✓</span>
-      </div>
-      <div class="stage-text-group">
-        <span class="stage-name">เพาะกล้า</span>
-        <span class="stage-days">1–25 วัน</span>
-      </div>
-      <span class="stage-state">กำลังทำ</span>
-    </button>
-
-    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-2" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(2)">
-      <div class="stage-node">
-        <span class="stage-node-mark">•</span>
-      </div>
-      <div class="stage-text-group">
-        <span class="stage-name">ต้นกล้า</span>
-        <span class="stage-days">26–50 วัน</span>
-      </div>
-      <span class="stage-state">รอถัดไป</span>
-    </button>
-
-    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-3" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(3)">
-      <div class="stage-node">
-        <span class="stage-node-mark">＋</span>
-      </div>
-      <div class="stage-text-group">
-        <span class="stage-name">เติบโต</span>
-        <span class="stage-days">51–75 วัน</span>
-      </div>
-      <span class="stage-state">รอถัดไป</span>
-    </button>
-
-    <button class="stage-tab glass-panel border-bio-line hover:border-bio-cyan/40" id="stageBtn-4" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(4)">
-      <div class="stage-node">
-        <span class="stage-node-mark">◫</span>
-      </div>
-      <div class="stage-text-group">
-        <span class="stage-name">เก็บเกี่ยว</span>
-        <span class="stage-days">76–110 วัน</span>
-      </div>
-      <span class="stage-state">ปลายทาง</span>
-    </button>
+<!-- BEGIN: Lifecycle Stage Tracker -->
+<section class="px-7 pt-3.5 z-10" data-purpose="lifecycle-tracker-section">
+  <div class="glass-card px-8 py-3.5" data-purpose="lifecycle-tracker" role="tablist" aria-label="ระยะการเจริญเติบโต">
+    <div class="relative flex items-center justify-between px-2">
+      <!-- Base track -->
+      <div class="absolute top-1/2 left-8 right-8 -translate-y-4 h-1 bg-[#1c2930] -z-0"></div>
+      <!-- Active connecting progress line -->
+      <div class="absolute top-1/2 left-8 -translate-y-4 h-1 bg-gradient-to-r from-emerald-600 to-[#2ef387] rounded-full -z-0 transition-all duration-500" id="stage-progress-bar" style="width: 36%;"></div>
+      <!-- Stage 1: เพาะกล้า -->
+      <button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-1" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(1)">
+        <div class="w-13 h-13 rounded-full bg-[#122227] border-2 border-emerald-500/70 flex items-center justify-center text-emerald-400 mb-2 shadow-sm transition-all group-hover:scale-105" id="stage-icon-1"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div>
+        <span class="text-sm text-neutral-300 font-medium whitespace-nowrap transition-colors" id="stage-label-1">เพาะกล้า</span>
+      </button>
+      <!-- Stage 2: ต้นกล้า -->
+      <button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-2" role="tab" aria-selected="true" tabindex="0" onclick="switchStage(2)">
+        <div class="w-14 h-14 rounded-full bg-emerald-400 border-2 border-emerald-300 flex items-center justify-center text-emerald-950 font-bold mb-1.5 scale-105 transition-all shadow-md" id="stage-icon-2"><svg class="w-8 h-8 text-neutral-950" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg></div>
+        <span class="text-sm text-white font-extrabold tracking-wide whitespace-nowrap transition-colors" id="stage-label-2">ต้นกล้า</span>
+      </button>
+      <!-- Stage 3: เติบโต -->
+      <button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-3" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(3)">
+        <div class="w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105" id="stage-icon-3"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        <span class="text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors" id="stage-label-3">เติบโต</span>
+      </button>
+      <!-- Stage 4: เก็บเกี่ยว -->
+      <button class="flex flex-col items-center z-10 w-28 group cursor-pointer focus:outline-none transition-transform active:scale-95" id="stage-btn-4" role="tab" aria-selected="false" tabindex="0" onclick="switchStage(4)">
+        <div class="w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105" id="stage-icon-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        <span class="text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors" id="stage-label-4">เก็บเกี่ยว</span>
+      </button>
+    </div>
   </div>
 </section>
+<!-- END: Lifecycle Stage Tracker -->
 <!-- CONTENT VIEW SUB-TABS -->
 <section class="px-7 py-2.5 z-10">
 <div class="flex items-center gap-2 p-1.5 bg-bio-surface/90 rounded-2xl border border-bio-line/80 backdrop-blur-md" role="tablist" aria-label="หมวดหมู่ข้อมูล">

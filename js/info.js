@@ -798,30 +798,71 @@ function switchStage(stageNum) {
   }
   
   const progressMap = {
-    1: '28%',
-    2: '51%',
-    3: '74%',
-    4: '100%'
+    1: '8%',
+    2: '36%',
+    3: '64%',
+    4: '92%'
   };
 
-  const track = document.getElementById('stageProgressTrack');
-  if (track) {
-    track.style.width = progressMap[stageNum] || '28%';
+  const progressBar = document.getElementById('stage-progress-bar') || document.getElementById('stageProgressTrack');
+  if (progressBar) {
+    progressBar.style.width = progressMap[stageNum] || '36%';
   }
 
+  const stageIcons = {
+    1: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m0-16a8 8 0 100 16 8 8 0 000-16z" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    2: '<svg class="w-8 h-8 text-neutral-950" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg>',
+    3: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    4: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+  };
+
+  const stageIconsFuture = {
+    1: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m0-16a8 8 0 100 16 8 8 0 000-16z" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    2: '<svg class="w-6 h-6 text-neutral-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg>',
+    3: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    4: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+  };
+
   for (let i = 1; i <= 4; i++) {
-    const btn = document.getElementById('stageBtn-' + i);
-    if (!btn) continue;
-    if (i === stageNum) {
-      btn.className = 'stage-tab glass-panel-active';
-      const node = btn.querySelector('.stage-node');
-      if (node) node.classList.add('stage-node-active');
-    } else {
-      btn.className = 'stage-tab glass-panel border-bio-line hover:border-bio-cyan/40';
-      const node = btn.querySelector('.stage-node');
-      if (node) node.classList.remove('stage-node-active');
+    const btn = document.getElementById(`stage-btn-${i}`) || document.getElementById(`stageBtn-${i}`);
+    const iconDiv = document.getElementById(`stage-icon-${i}`);
+    const labelSpan = document.getElementById(`stage-label-${i}`);
+
+    if (btn) {
+      btn.setAttribute('aria-selected', i === stageNum ? 'true' : 'false');
+      btn.setAttribute('tabindex', '0');
+      // If legacy stage-tab elements exist
+      if (btn.classList.contains('stage-tab')) {
+        if (i === stageNum) {
+          btn.className = 'stage-tab glass-panel-active';
+        } else {
+          btn.className = 'stage-tab glass-panel border-bio-line hover:border-bio-cyan/40';
+        }
+      }
+    }
+
+    if (iconDiv && labelSpan) {
+      if (i === stageNum) {
+        // Active state
+        iconDiv.className = 'w-14 h-14 rounded-full bg-emerald-400 border-2 border-emerald-300 flex items-center justify-center text-emerald-950 font-bold mb-1.5 scale-105 transition-all shadow-md';
+        iconDiv.innerHTML = stageIcons[i] || `<svg class="w-7 h-7 text-neutral-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
+        labelSpan.className = 'text-sm text-white font-extrabold tracking-wide whitespace-nowrap transition-colors';
+      } else if (i < stageNum) {
+        // Completed prior stage
+        iconDiv.className = 'w-13 h-13 rounded-full bg-[#122227] border-2 border-emerald-500/70 flex items-center justify-center text-emerald-400 mb-2 shadow-sm transition-all group-hover:scale-105';
+        iconDiv.innerHTML = `<svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
+        labelSpan.className = 'text-sm text-neutral-300 font-medium whitespace-nowrap transition-colors';
+      } else {
+        // Future stage
+        iconDiv.className = 'w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105';
+        iconDiv.innerHTML = stageIconsFuture[i] || stageIcons[i];
+        labelSpan.className = 'text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors';
+      }
     }
   }
+
+  // Cross-compatibility aliases
+  window.selectStage = switchStage;
 
   const data = stageData[stageNum];
   const stageBadgeEl = document.getElementById('stageBadge');
@@ -1821,7 +1862,13 @@ if (requestedTask) {
 
 // Live real-time sync with home page
 window.addEventListener('storage', (e) => {
-  if (e.key === STORAGE_TASKS_KEY) {
+  if (e.key === STORAGE_STAGE_KEY) {
+    const newStage = Number(e.newValue);
+    if (Number.isInteger(newStage) && stageData[newStage] && newStage !== currentStage) {
+      switchStage(newStage);
+      if (currentSubTab) switchSubTab(currentSubTab);
+    }
+  } else if (e.key === STORAGE_TASKS_KEY) {
     if (stageData[currentStage]) {
       switchStage(currentStage);
       if (currentSubTab) switchSubTab(currentSubTab);

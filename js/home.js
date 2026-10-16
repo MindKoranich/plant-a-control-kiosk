@@ -292,6 +292,13 @@ function selectStage(stageNum) {
     4: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
   };
 
+  const stageIconsFuture = {
+    1: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m0-16a8 8 0 100 16 8 8 0 000-16z" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    2: '<svg class="w-6 h-6 text-neutral-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg>',
+    3: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    4: '<svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+  };
+
   const progressBar = document.getElementById('stage-progress-bar');
   if (progressBar) {
     progressBar.style.width = data.progressWidth;
@@ -320,10 +327,13 @@ function selectStage(stageNum) {
     } else {
       // Future stage
       iconDiv.className = 'w-13 h-13 rounded-full bg-[#162128] border-2 border-[#2b3c46] flex items-center justify-center text-neutral-400 mb-2 transition-all group-hover:scale-105';
-      iconDiv.innerHTML = stageIcons[i];
+      iconDiv.innerHTML = stageIconsFuture[i] || stageIcons[i];
       labelSpan.className = 'text-sm text-neutral-400 font-medium whitespace-nowrap transition-colors';
     }
   }
+
+  // Cross-page compatibility alias
+  window.switchStage = selectStage;
 
   // 2. Update telemetry stats (top-left card)
   const elDay = document.getElementById('telemetry-day');
@@ -636,9 +646,14 @@ window.addEventListener('DOMContentLoaded', () => {
   loadKioskDataAndApply();
 });
 
-// Sync on storage change (if admin updates values or user toggles tasks in another tab)
+// Sync on storage change (if admin updates values or user toggles tasks or changes stage in another tab)
 window.addEventListener('storage', (event) => {
-  if (event.key === STORAGE_TASKS_KEY) {
+  if (event.key === STORAGE_STAGE_KEY) {
+    const newStage = Number(event.newValue);
+    if (Number.isInteger(newStage) && STAGE_DATA[newStage] && newStage !== currentActiveStage) {
+      selectStage(newStage);
+    }
+  } else if (event.key === STORAGE_TASKS_KEY) {
     const data = STAGE_DATA[currentActiveStage];
     if (data) renderTodoList(data.todos, currentActiveStage);
   } else if (event.key === 'plant_a_control_kiosk_data' || event.key === 'plant_a_control_kiosk_data_updated') {
