@@ -456,10 +456,10 @@ function renderTodoList(todos, stageNum) {
           <a href="info.html?stage=${stageNum}" 
              class="task-text-link" 
              title="คลิกเพื่อดูขั้นตอนปฏิบัติและข้อควรระวังในหน้าข้อมูลเพิ่มเติม">
-            <span class="px-2.5 py-1 rounded-md border text-xs font-mono font-bold tracking-wider ${todo.timeStyle} flex-shrink-0">
+            <span class="px-3 py-1.5 rounded-md border text-[13.5px] font-mono font-bold tracking-wider ${todo.timeStyle} flex-shrink-0">
               ${todo.time}
             </span>
-            <span class="task-text text-base font-medium text-neutral-100 tracking-normal font-sans truncate transition-colors">
+            <span class="task-text text-[16.5px] font-semibold text-white tracking-normal font-sans transition-colors leading-relaxed">
               ${todo.desc}
             </span>
           </a>
@@ -467,7 +467,7 @@ function renderTodoList(todos, stageNum) {
         
         <!-- Hint link icon with min 44px touch target -->
         <a href="info.html?stage=${stageNum}" 
-           class="text-xs text-neutral-300 hover:text-emerald-300 font-medium pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors"
+           class="text-[13.5px] text-cyan-300 hover:text-emerald-300 font-bold pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors"
            title="ดูรายละเอียดขั้นตอน">
           <span>วิธีทำ</span>
           <span aria-hidden="true">↗</span>

@@ -861,10 +861,10 @@ function switchStage(stageNum) {
         
         <div class="flex items-start justify-between gap-4">
           <div class="flex-1">
-            <h3 class="todo-card-title text-[20px] font-thai font-bold text-white leading-snug tracking-tight">
+            <h3 class="todo-card-title text-[20px] font-thai font-bold text-white leading-snug">
               ${guide.emoji} ${item.title}
             </h3>
-            <p class="todo-card-summary text-[15px] font-thai text-bio-body mt-1.5 leading-relaxed">
+            <p class="todo-card-summary text-[15.5px] font-thai text-[#d1e2eb] mt-1.5 leading-relaxed">
               ${item.desc}
             </p>
             <div class="mt-3 flex flex-wrap items-center gap-2">
@@ -897,22 +897,22 @@ function switchStage(stageNum) {
 
         <div class="todo-detail-panel" hidden>
           <div class="flex items-center justify-between pb-1 border-b border-bio-cyan/20">
-            <div class="todo-detail-heading flex items-center gap-2 font-thai font-bold text-[15px]">
+            <div class="todo-detail-heading flex items-center gap-2 font-thai font-bold text-[16px]">
               <span class="text-lg">${guide.emoji}</span>
               <span>คู่มือขั้นตอนปฏิบัติมาตรฐาน (SOP)</span>
             </div>
-            <span class="text-xs font-mono font-bold text-bio-cyan px-2.5 py-0.5 rounded bg-bio-cyan/15 border border-bio-cyan/30">STANDARD OPERATION</span>
+            <span class="text-[13px] font-mono font-bold text-bio-cyan px-2.5 py-0.5 rounded bg-bio-cyan/15 border border-bio-cyan/30">STANDARD OPERATION</span>
           </div>
 
           <div class="todo-detail-section">
-            <strong class="text-bio-accent flex items-center gap-1.5 font-thai">
+            <strong class="text-bio-accent flex items-center gap-1.5 font-thai text-[15px]">
               <span>🎯</span> เป้าหมายการปฏิบัติ
             </strong>
-            <p class="text-bio-body font-medium font-thai">${guide.goal}</p>
+            <p class="text-[#d1e2eb] font-medium font-thai text-[15px] leading-relaxed">${guide.goal}</p>
           </div>
 
           <div class="space-y-2">
-            <strong class="text-white block font-bold text-sm font-thai">🧭 ขั้นตอนปฏิบัติทีละขั้น (SOP)</strong>
+            <strong class="text-white block font-bold text-[15px] font-thai">🧭 ขั้นตอนปฏิบัติทีละขั้น (SOP)</strong>
             <div class="space-y-2">
               ${guide.steps.map((step, sIdx) => `
                 <div class="todo-sop-numbered-step">
@@ -933,9 +933,9 @@ function switchStage(stageNum) {
           </div>
 
           <div class="todo-warning">
-            <strong class="flex items-center gap-1.5 font-thai"><span>⚠️</span> จุดสังเกตความผิดปกติ:</strong>
-            <p class="mt-1 font-thai">${guide.warning}</p>
-            <div class="todo-consequence mt-2 font-thai">
+            <strong class="flex items-center gap-1.5 font-thai text-[15px]"><span>⚠️</span> จุดสังเกตความผิดปกติ:</strong>
+            <p class="mt-1 font-thai text-[14.5px] leading-relaxed text-[#fecdd3]">${guide.warning}</p>
+            <div class="todo-consequence mt-2 font-thai text-[14.5px] leading-relaxed">
               <b>ผลกระทบหากไม่แก้ไข:</b> ${guide.consequence}
             </div>
           </div>
@@ -957,10 +957,10 @@ function switchStage(stageNum) {
             </div>
             <div>
               <h3 class="text-[20px] font-thai font-bold text-white leading-tight">${idx + 1}. ${cat.cat}</h3>
-              <p class="text-sm font-thai text-bio-muted mt-0.5">หมวดหมู่วัสดุ-เครื่องมือจำเป็นประจำ Stage ${stageNum}</p>
+              <p class="text-[14.5px] font-thai text-[#d1e2eb] mt-0.5">หมวดหมู่วัสดุ-เครื่องมือจำเป็นประจำ Stage ${stageNum}</p>
             </div>
           </div>
-          <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-bio-card2 border border-bio-line text-bio-cyan">
+          <span class="text-[13.5px] font-mono font-bold px-3 py-1 rounded-full bg-bio-card2 border border-bio-line text-bio-cyan">
             ${cat.items.length} รายการ
           </span>
         </div>
@@ -1030,8 +1030,8 @@ function switchStage(stageNum) {
       <div class="kiosk-benchmark-card">
         <div class="kiosk-benchmark-icon">✓</div>
         <div>
-          <b class="text-white block font-thai font-bold text-[15px] leading-snug">${b.title}</b>
-          <span class="kiosk-benchmark-text font-thai mt-0.5 block leading-normal">${b.desc}</span>
+          <b class="text-white block font-thai font-bold text-[16px] leading-snug">${b.title}</b>
+          <span class="kiosk-benchmark-text font-thai mt-1 block leading-relaxed">${b.desc}</span>
         </div>
       </div>
     `).join('');

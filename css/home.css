@@ -11,9 +11,9 @@
   --accent-cyan: #22d3ee;
   --accent-amber: #f59e0b;
   --accent-red: #ef233c;
-  --text-primary: #f1f7f9;
-  --text-secondary: #94a9b3;
-  --text-muted: #68808c;
+  --text-primary: #ffffff;
+  --text-secondary: #d1e2eb;
+  --text-muted: #9ab3c0;
 }
 
 * {
@@ -30,8 +30,11 @@ body {
   padding: 0;
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   font-family: 'Prompt', 'Space Grotesk', sans-serif;
   color: var(--text-primary);
+  letter-spacing: 0.005em;
 }
 
 /* Accessible focus visible ring */
@@ -250,15 +253,16 @@ body {
 }
 
 .kiosk-viewport [data-purpose="tasks-card"] h2 {
-  font-size: 19px !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
   color: #ffffff;
 }
 
 /* Kiosk Task Item Interactivity & Touch Targets */
 .task-item-card {
   transition: all 0.2s ease;
-  min-height: 58px;
-  padding: 12px 18px;
+  min-height: 62px;
+  padding: 13px 18px;
   background-color: rgba(22, 35, 43, 0.75);
   border: 1px solid var(--border-subtle);
 }
@@ -273,8 +277,16 @@ body {
   border-color: rgba(46, 243, 135, 0.35);
 }
 
+.task-item-card .task-text {
+  font-size: 16.5px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.005em !important;
+}
+
 .task-item-card.is-completed .task-text {
-  color: #94a9b3;
+  color: #9cb2bd !important;
   text-decoration: line-through;
   text-decoration-color: rgba(46, 243, 135, 0.6);
 }

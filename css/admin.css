@@ -10,8 +10,8 @@
   --admin-cyan: #22d3ee;
   --admin-amber: #f59e0b;
   --admin-danger: #ef233c;
-  --admin-body: #c5d4db;
-  --admin-muted: #839ca7;
+  --admin-body: #d1e2eb;
+  --admin-muted: #9ab3c0;
 }
 
 * {
@@ -22,7 +22,11 @@ body {
   background: var(--admin-bg);
   background: radial-gradient(circle at 50% 10%, #10242e 0%, #070e12 70%);
   color: #f1f7f9;
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.005em;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -56,12 +60,13 @@ body {
   background: #081217;
   border: 1px solid var(--admin-border);
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 11px 15px;
   color: #ffffff;
   font-family: 'Prompt', sans-serif;
-  font-size: 15px;
+  font-size: 15.5px;
+  line-height: 1.5;
   transition: all 0.2s ease;
-  min-height: 44px;
+  min-height: 46px;
 }
 
 .admin-input:focus {
@@ -79,10 +84,11 @@ body {
 
 .admin-label {
   display: block;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--admin-muted);
-  margin-bottom: 6px;
+  color: #d1e2eb;
+  margin-bottom: 7px;
+  letter-spacing: 0.005em;
 }
 
 /* Buttons */
@@ -113,11 +119,11 @@ body {
 
 .admin-btn-secondary {
   background: #152731;
-  color: #e2f1f5;
+  color: #ffffff;
   font-family: 'Prompt', sans-serif;
   font-weight: 700;
-  font-size: 14px;
-  padding: 10px 18px;
+  font-size: 14.5px;
+  padding: 11px 18px;
   border-radius: 12px;
   border: 1px solid var(--admin-border);
   cursor: pointer;
@@ -140,8 +146,8 @@ body {
   color: #ff6b7d;
   font-family: 'Prompt', sans-serif;
   font-weight: 700;
-  font-size: 14px;
-  padding: 10px 18px;
+  font-size: 14.5px;
+  padding: 11px 18px;
   border-radius: 12px;
   border: 1px solid rgba(239, 35, 60, 0.35);
   cursor: pointer;
@@ -161,12 +167,12 @@ body {
 
 /* Stage Navigation Tabs */
 .admin-tab {
-  padding: 12px 18px;
+  padding: 12px 20px;
   border-radius: 12px;
   font-family: 'Prompt', sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  color: var(--admin-muted);
+  font-size: 15.5px;
+  color: #d1e2eb;
   background: #0d1a21;
   border: 1px solid var(--admin-border);
   cursor: pointer;
