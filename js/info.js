@@ -792,6 +792,10 @@ function switchStage(stageNum) {
   if (navHomeBtn) {
     navHomeBtn.href = `index.html?stage=${stageNum}`;
   }
+  const infoLogoLink = document.getElementById('infoLogoLink');
+  if (infoLogoLink) {
+    infoLogoLink.href = `index.html?stage=${stageNum}`;
+  }
   
   const progressMap = {
     1: '28%',
