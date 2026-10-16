@@ -264,15 +264,45 @@ body.theme-day [data-purpose="specimen-monitoring-zone"] .bg-gradient-to-b {
 }
 
 /* TO DO LIST Section (index.html) */
-body.theme-day #equipment-link {
+body.theme-day #equipment-link,
+body.theme-day #procedures-link {
   background: #f1f5f9 !important;
   border-color: #cbd5e1 !important;
   color: #0f172a !important;
 }
 
-body.theme-day #equipment-link:hover {
+body.theme-day #equipment-link:hover,
+body.theme-day #procedures-link:hover {
   background: #e2e8f0 !important;
+  color: #059669 !important;
+}
+
+body.theme-day .home-tasks-progress-panel,
+body.theme-day .kiosk-checklist-progress-panel {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+}
+
+body.theme-day .home-tasks-progress-panel .font-mono,
+body.theme-day .kiosk-checklist-progress-panel .font-mono {
   color: #0f172a !important;
+}
+
+body.theme-day #home-tasks-progress-bar,
+body.theme-day #checklist-progress-bar {
+  background: #059669 !important;
+}
+
+body.theme-day .kiosk-home-link-pill {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #059669 !important;
+}
+
+body.theme-day .kiosk-home-link-pill:hover {
+  background: #e2e8f0 !important;
+  border-color: #059669 !important;
 }
 
 body.theme-day .task-item-card {

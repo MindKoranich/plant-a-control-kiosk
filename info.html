@@ -354,19 +354,55 @@
 </div>
 
 <!-- VIEW 1: TO-DO LIST DETAILED -->
-<div class="space-y-3.5 hidden" id="view-todo">
-<div class="flex items-center justify-between px-1">
-<span class="font-thai font-bold text-white text-[19px] flex items-center gap-2.5">
-<svg class="w-6 h-6 text-bio-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
-</svg>
-          ขั้นตอนการปฏิบัติรายวัน</span>
-<span class="font-thai font-bold text-bio-accent text-[16px] bg-bio-accent/15 px-3.5 py-1 rounded-full border border-bio-accent/35" id="todoCounter">
-          3 งานวันนี้
+<div class="space-y-4 hidden" id="view-todo">
+  <!-- Checklist Hub & Progress Bar (Synced with Home Page) -->
+  <div class="kiosk-checklist-progress-panel rounded-2xl space-y-4">
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-8 bg-[#2ef387] rounded-full inline-block"></span>
+        <div>
+          <h2 class="font-thai font-bold text-white text-[21px] flex items-center gap-2">
+            <span>เช็คลิสต์ขั้นตอนการปฏิบัติงาน</span>
+          </h2>
+          <p class="font-thai text-[14px] text-[#9ab3c0] mt-0.5">
+            ขั้นตอนปฏิบัติประจำวัน &amp; คู่มือมาตรฐาน SOP • ซิงค์ตรงกับหน้าหลัก
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="kiosk-home-link-pill flex items-center gap-2 px-4 py-2 rounded-xl bg-[#122227] hover:bg-[#1a3038] border border-bio-accent/40 text-bio-accent font-thai font-bold text-[14.5px] transition-all active:scale-95 shadow-sm" title="กลับไปยังหน้าหลัก Dashboard">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          <span>หน้าหลัก (Home)</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Checklist Progress Display (Exact match to design specification) -->
+    <div class="space-y-2.5 pt-1">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div class="font-mono font-bold text-[19px] text-white tracking-wide flex items-center gap-2" id="checklist-progress-text">
+          2 of 3 Tasks Completed (67%)
+        </div>
+        <span class="text-[12.5px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5" id="checklist-sync-badge">
+          <span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>
+          <span>LIVE SYNCED</span>
         </span>
-<span class="todo-progress-pill" id="todoProgress">เหลือ 2 งาน</span>
-</div>
-<div class="space-y-3.5" id="todoContainer">
+      </div>
+      <div class="w-full bg-[#13222a] border border-[#1c323e] h-3 rounded-full overflow-hidden p-0.5">
+        <div id="checklist-progress-bar" class="bg-[#2ef387] h-full rounded-full transition-all duration-500" style="width: 67%"></div>
+      </div>
+      <div class="flex items-center justify-between text-[13.5px] font-thai pt-0.5">
+        <span class="text-[#d1e2eb] font-semibold" id="checklist-thai-summary">เสร็จแล้ว 2 จาก 3 รายการ (67%)</span>
+        <span class="text-bio-cyan font-medium flex items-center gap-1">
+          <span>แตะปุ่ม</span>
+          <b class="text-[#2ef387]">✓</b>
+          <span>เพื่อบันทึกงานที่ทำเสร็จแล้ว</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-3.5" id="todoContainer">
     <div class="glass-panel p-5 rounded-2xl border-bio-line space-y-3.5 hover:border-bio-accent/40 transition-all">
       <div class="flex items-center justify-between border-b border-bio-line/80 pb-2.5">
         <span class="px-3.5 py-1.5 rounded-xl bg-bio-card2 border border-bio-line text-[18px] font-mono font-bold text-bio-accent">

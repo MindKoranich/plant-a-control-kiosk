@@ -425,10 +425,40 @@ function selectStage(stageNum) {
 
 // Render To-Do items with separated click targets:
 // Circle button: toggle completion state (immediate save to localStorage)
-// Text & badges: click opens info.html?stage=X to view complete step-by-step instructions
+// Text & badges: click opens info.html?stage=X&tab=todo&task=Y to view complete step-by-step instructions
 function renderTodoList(todos, stageNum) {
   const tasksContainer = document.getElementById('tasks-list-items');
   if (!tasksContainer) return;
+
+  // Calculate checklist progress (exact match to design spec)
+  const totalCount = todos.length;
+  const doneCount = todos.filter(t => isTaskCompleted(t.id, t.defaultChecked)).length;
+  const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+
+  const progressText = document.getElementById('home-tasks-progress-text');
+  if (progressText) {
+    progressText.textContent = `${doneCount} of ${totalCount} Tasks Completed (${pct}%)`;
+  }
+  const progressBar = document.getElementById('home-tasks-progress-bar');
+  if (progressBar) {
+    progressBar.style.width = `${pct}%`;
+  }
+  const statusBadge = document.getElementById('home-tasks-status-badge');
+  if (statusBadge) {
+    if (pct === 100) {
+      statusBadge.className = 'text-[12px] font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
+      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span>ALL DONE ✓';
+    } else {
+      statusBadge.className = 'text-[12px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5';
+      statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>IN PROGRESS';
+    }
+  }
+
+  // Update procedure & equipment links for the active stage
+  const procLink = document.getElementById('procedures-link');
+  if (procLink) procLink.href = `info.html?stage=${stageNum}&tab=todo`;
+  const equipLink = document.getElementById('equipment-link');
+  if (equipLink) equipLink.href = `info.html?stage=${stageNum}&tab=equip`;
 
   tasksContainer.innerHTML = todos.map(todo => {
     const isDone = isTaskCompleted(todo.id, todo.defaultChecked);
@@ -452,10 +482,10 @@ function renderTodoList(todos, stageNum) {
             <span class="check-dot"></span>
           </button>
           
-          <!-- Task description link to info.html -->
-          <a href="info.html?stage=${stageNum}" 
+          <!-- Task description link to info.html with tab=todo&task=ID deep link -->
+          <a href="info.html?stage=${stageNum}&tab=todo&task=${todo.id}" 
              class="task-text-link" 
-             title="คลิกเพื่อดูขั้นตอนปฏิบัติและข้อควรระวังในหน้าข้อมูลเพิ่มเติม">
+             title="คลิกเพื่อดูขั้นตอนปฏิบัติ SOP ในหน้าข้อมูลเพิ่มเติม">
             <span class="px-3 py-1.5 rounded-md border text-[13.5px] font-mono font-bold tracking-wider ${todo.timeStyle} flex-shrink-0">
               ${todo.time}
             </span>
@@ -465,10 +495,10 @@ function renderTodoList(todos, stageNum) {
           </a>
         </div>
         
-        <!-- Hint link icon with min 44px touch target -->
-        <a href="info.html?stage=${stageNum}" 
+        <!-- Hint link icon with min 44px touch target linking to specific task SOP -->
+        <a href="info.html?stage=${stageNum}&tab=todo&task=${todo.id}" 
            class="text-[13.5px] text-cyan-300 hover:text-emerald-300 font-bold pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors"
-           title="ดูรายละเอียดขั้นตอน">
+           title="ดูรายละเอียดขั้นตอน SOP">
           <span>วิธีทำ</span>
           <span aria-hidden="true">↗</span>
         </a>
@@ -493,6 +523,16 @@ function handleTaskToggle(taskId, defaultChecked, event) {
     renderTodoList(data.todos, currentActiveStage);
   }
 }
+
+// Real-time synchronization when tasks are toggled from another page/tab (e.g. info.html)
+window.addEventListener('storage', (e) => {
+  if (e.key === STORAGE_TASKS_KEY) {
+    const data = STAGE_DATA[currentActiveStage];
+    if (data && data.todos) {
+      renderTodoList(data.todos, currentActiveStage);
+    }
+  }
+});
 
 // Dynamic JSON Loader: fetch from LocalStorage (Admin edited) or data/kiosk-data.json
 async function loadKioskDataAndApply() {

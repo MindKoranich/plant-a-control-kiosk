@@ -850,10 +850,16 @@ function switchStage(stageNum) {
       return `
       <div class="todo-card glass-panel p-5 rounded-2xl border-bio-line space-y-3.5 hover:border-bio-accent/40 transition-all ${isDone ? 'todo-card-done' : ''}" data-todo-card="${idx}" data-task-id="${taskId}">
         <div class="flex items-center justify-between border-b border-bio-line/80 pb-2.5">
-          <span class="todo-time" data-tone="${idx}">
-            <span class="todo-time-emoji">${guide.emoji}</span>
-            ${item.time}
-          </span>
+          <div class="flex items-center gap-2.5">
+            <span class="todo-time" data-tone="${idx}">
+              <span class="todo-time-emoji">${guide.emoji}</span>
+              ${item.time}
+            </span>
+            <span class="todo-card-status-pill ${isDone ? 'px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5' : 'px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-[#14232c] text-[#9ab3c0] border border-[#233844] flex items-center gap-1.5'}">
+              <span class="w-1.5 h-1.5 rounded-full ${isDone ? 'bg-emerald-400' : 'bg-cyan-400'}"></span>
+              ${isDone ? 'เสร็จสิ้นแล้ว' : 'รอดำเนินการ'}
+            </span>
+          </div>
           <span class="todo-step-label">
             ขั้นตอน ${idx + 1} / ${data.todos.length}
           </span>
@@ -884,13 +890,13 @@ function switchStage(stageNum) {
                     onclick="toggleTodoCheck(this, '${taskId}', ${item.done})" 
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTodoCheck(this, '${taskId}', ${item.done});}"
                     class="todo-check-button ${isDone ? 'is-done' : ''}" 
-                    title="กดเพื่อทำเครื่องหมายว่าเสร็จสิ้น" 
-                    aria-label="กดเพื่อทำเครื่องหมายงานที่ ${idx + 1} ว่าเสร็จสิ้น">
-            ${isDone ? '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : '<span class="todo-check-pending-label"><span class="todo-check-pending-icon">✓</span>กดทำ</span>'}
+                    title="${isDone ? 'บันทึกเสร็จแล้ว (แตะเพื่อยกเลิก)' : 'แตะเพื่อบันทึกว่าทำเสร็จแล้ว'}" 
+                    aria-label="${isDone ? 'บันทึกเสร็จแล้ว (แตะเพื่อยกเลิก)' : 'แตะเพื่อบันทึกว่าทำเสร็จแล้ว'}">
+              ${isDone ? '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : '<span class="todo-check-pending-label"><span class="todo-check-pending-icon">✓</span>กดทำ</span>'}
             </button>
-            <button class="todo-detail-button" type="button" onclick="toggleTaskDetails(this)" aria-expanded="false" tabindex="0">
+            <button class="todo-detail-button" type="button" onclick="toggleTaskDetails(this)" aria-expanded="false" tabindex="0" title="คลิกเพื่อดูคู่มือ SOP ทีละขั้น">
               <span class="todo-detail-icon">＋</span>
-              <span>ดูขั้นตอน</span>
+              <span>ดูขั้นตอน (SOP)</span>
             </button>
           </div>
         </div>
@@ -1688,18 +1694,29 @@ function toggleTodoCheck(btn, taskId, defaultChecked = false) {
     setTaskStorage(taskId, newStatus);
   }
 
+  const card = btn.closest('.todo-card');
+  const statusPill = card?.querySelector('.todo-card-status-pill');
+
   if (!newStatus) {
     btn.className = 'todo-check-button w-12 h-12 rounded-xl flex items-center justify-center font-thai font-bold flex-shrink-0 transition-all';
     btn.innerHTML = '<span class="todo-check-pending-label"><span class="todo-check-pending-icon">✓</span>กดทำ</span>';
-    btn.closest('.todo-card')?.classList.remove('todo-card-done');
-    btn.title = 'กดเพื่อทำเครื่องหมายว่าเสร็จสิ้น';
-    btn.setAttribute('aria-label', 'กดเพื่อทำเครื่องหมายว่าเสร็จสิ้น');
+    card?.classList.remove('todo-card-done');
+    btn.title = 'แตะเพื่อบันทึกว่าทำเสร็จแล้ว';
+    btn.setAttribute('aria-label', 'แตะเพื่อบันทึกว่าทำเสร็จแล้ว');
+    if (statusPill) {
+      statusPill.className = 'todo-card-status-pill px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-[#14232c] text-[#9ab3c0] border border-[#233844] flex items-center gap-1.5';
+      statusPill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>รอดำเนินการ';
+    }
   } else {
     btn.className = 'todo-check-button is-done w-12 h-12 rounded-xl flex items-center justify-center font-thai font-bold flex-shrink-0 transition-all';
     btn.innerHTML = '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
-    btn.closest('.todo-card')?.classList.add('todo-card-done');
-    btn.title = 'ทำเครื่องหมายว่าเสร็จสิ้นแล้ว';
-    btn.setAttribute('aria-label', 'ทำเครื่องหมายว่าเสร็จสิ้นแล้ว');
+    card?.classList.add('todo-card-done');
+    btn.title = 'บันทึกเสร็จแล้ว (แตะเพื่อยกเลิก)';
+    btn.setAttribute('aria-label', 'บันทึกเสร็จแล้ว (แตะเพื่อยกเลิก)');
+    if (statusPill) {
+      statusPill.className = 'todo-card-status-pill px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5';
+      statusPill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>เสร็จสิ้นแล้ว';
+    }
   }
   updateTodoProgress();
 }
@@ -1712,17 +1729,59 @@ function toggleTaskDetails(btn) {
   panel.hidden = isOpen;
   btn.setAttribute('aria-expanded', String(!isOpen));
   btn.querySelector('.todo-detail-icon').textContent = isOpen ? '＋' : '−';
-  btn.querySelector('span:last-child').textContent = isOpen ? 'ดูขั้นตอน' : 'ซ่อนขั้นตอน';
+  btn.querySelector('span:last-child').textContent = isOpen ? 'ดูขั้นตอน (SOP)' : 'ซ่อนขั้นตอน (SOP)';
   card.classList.toggle('todo-card-expanded', !isOpen);
 }
 
 function updateTodoProgress() {
   const cards = [...document.querySelectorAll('.todo-card')];
+  const totalCount = cards.length;
   const doneCount = cards.filter(card => card.classList.contains('todo-card-done')).length;
+  const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+
+  // Exact match to user's specification: "X of Y Tasks Completed (Z%)"
+  const progText = document.getElementById('checklist-progress-text');
+  if (progText) {
+    progText.textContent = `${doneCount} of ${totalCount} Tasks Completed (${pct}%)`;
+  }
+  const progBar = document.getElementById('checklist-progress-bar');
+  if (progBar) {
+    progBar.style.width = `${pct}%`;
+  }
+  const progSub = document.getElementById('checklist-thai-summary');
+  if (progSub) {
+    progSub.textContent = `เสร็จแล้ว ${doneCount} จาก ${totalCount} รายการ (${pct}%)`;
+  }
+  const syncBadge = document.getElementById('checklist-sync-badge');
+  if (syncBadge) {
+    if (pct === 100) {
+      syncBadge.className = 'text-[12.5px] font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/40 px-3 py-1 rounded-full flex items-center gap-1.5';
+      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>ALL COMPLETED (100%)</span>';
+    } else {
+      syncBadge.className = 'text-[12.5px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-3 py-1 rounded-full flex items-center gap-1.5';
+      syncBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-[#2ef387] animate-pulse"></span><span>LIVE SYNCED</span>';
+    }
+  }
+
   const progress = document.getElementById('todoProgress');
-  if (progress) progress.textContent = `เสร็จแล้ว ${doneCount} / ${cards.length}`;
+  if (progress) progress.textContent = `เสร็จแล้ว ${doneCount} / ${totalCount}`;
   const counter = document.getElementById('todoCounter');
-  if (counter) counter.textContent = doneCount === cards.length ? 'ครบทุกงานวันนี้' : `เหลือ ${cards.length - doneCount} งานวันนี้`;
+  if (counter) counter.textContent = doneCount === totalCount ? 'ครบทุกงานวันนี้' : `เหลือ ${totalCount - doneCount} งานวันนี้`;
+}
+
+function focusTaskCard(taskId) {
+  const card = document.querySelector(`[data-task-id="${taskId}"]`);
+  if (!card) return;
+  const panel = card.querySelector('.todo-detail-panel');
+  const btn = card.querySelector('.todo-detail-button');
+  if (panel && panel.hidden && btn) {
+    toggleTaskDetails(btn);
+  }
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('task-card-highlight');
+  setTimeout(() => {
+    card.classList.remove('task-card-highlight');
+  }, 3000);
 }
 
 // Initial render: check URL parameter or localStorage
@@ -1743,7 +1802,32 @@ if (Number.isInteger(requestedStage) && stageData[requestedStage]) {
 
 switchStage(validStage);
 updateTodoProgress();
-switchSubTab('chart');
+
+// Check if tab parameter is specified (e.g. from Home page link)
+const requestedTab = params.get('tab');
+if (requestedTab && ['chart', 'todo', 'equip', 'warn'].includes(requestedTab)) {
+  switchSubTab(requestedTab);
+} else {
+  switchSubTab('chart');
+}
+
+// Check if a specific task should be focused & expanded
+const requestedTask = params.get('task');
+if (requestedTask) {
+  setTimeout(() => {
+    focusTaskCard(requestedTask);
+  }, 250);
+}
+
+// Live real-time sync with home page
+window.addEventListener('storage', (e) => {
+  if (e.key === STORAGE_TASKS_KEY) {
+    if (stageData[currentStage]) {
+      switchStage(currentStage);
+      if (currentSubTab) switchSubTab(currentSubTab);
+    }
+  }
+});
 
 // Dynamic JSON Loader: fetch from LocalStorage (Admin edited) or data/kiosk-data.json
 async function loadKioskDataAndApply() {

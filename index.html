@@ -206,21 +206,39 @@
 </div>
 </div>
 <div class="flex items-center space-x-2">
-<a class="text-[14.5px] font-bold text-neutral-200 bg-[#162128] hover:bg-[#1c2930] px-4 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html" id="equipment-link">อุปกรณ์</a>
+<a class="text-[13.5px] font-bold text-cyan-300 hover:text-emerald-300 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=todo" id="procedures-link">ขั้นตอนปฏิบัติ (SOP) ↗</a>
+<a class="text-[13.5px] font-bold text-neutral-200 bg-[#162128] hover:bg-[#1c2930] px-3.5 py-2 min-h-[44px] flex items-center justify-center rounded-xl border border-[#23323b] transition-colors cursor-pointer active:scale-95" href="info.html?stage=2&tab=equip" id="equipment-link">อุปกรณ์</a>
 </div>
 </div>
+
+<!-- Home Checklist Progress Bar (Matching design & synced with info.html) -->
+<div class="home-tasks-progress-panel rounded-xl bg-[#091318]/95 border border-[#162731] mb-3.5 shadow-inner">
+  <div class="flex items-center justify-between mb-2">
+    <div class="font-mono font-bold text-[17px] text-white tracking-wide flex items-center gap-2" id="home-tasks-progress-text">
+      2 of 3 Tasks Completed (67%)
+    </div>
+    <span class="text-[12px] font-mono font-bold text-[#2ef387] bg-[#2ef387]/15 border border-[#2ef387]/35 px-2.5 py-0.5 rounded-full flex items-center gap-1.5" id="home-tasks-status-badge">
+      <span class="w-2 h-2 rounded-full bg-[#2ef387]"></span>
+      IN PROGRESS
+    </span>
+  </div>
+  <div class="w-full bg-[#13222a] border border-[#1c323e] h-2.5 rounded-full overflow-hidden p-0.5">
+    <div class="bg-[#2ef387] h-full rounded-full transition-all duration-500" id="home-tasks-progress-bar" style="width: 67%"></div>
+  </div>
+</div>
+
 <div class="space-y-3.5 pl-1" id="tasks-list-items">
 <div class="task-item-card flex items-center justify-between p-3.5 rounded-xl border bg-[#12221c]/70 border-emerald-500/40 is-completed" data-task-id="stage2_task0">
 <div class="flex items-center space-x-3 flex-1 min-w-0">
 <button type="button" role="checkbox" aria-checked="true" tabindex="0" class="task-check-btn is-checked" onclick="handleTaskToggle('stage2_task0', true, event)" aria-label="ทำเครื่องหมายว่ายังไม่เสร็จ" title="คลิกเพื่อยกเลิก">
 <span class="check-dot"></span>
 </button>
-<a href="info.html?stage=2" class="task-text-link" title="คลิกเพื่อดูขั้นตอนปฏิบัติและข้อควรระวังในหน้าข้อมูลเพิ่มเติม">
+<a href="info.html?stage=2&tab=todo&task=stage2_task0" class="task-text-link" title="คลิกเพื่อดูขั้นตอนปฏิบัติและข้อควรระวังในหน้าข้อมูลเพิ่มเติม">
 <span class="px-3 py-1.5 rounded-md border text-[13.5px] font-mono font-bold tracking-wider border-emerald-500/70 text-emerald-400 bg-[#122227] flex-shrink-0">08:00 น.</span>
 <span class="task-text text-[16.5px] font-semibold text-white tracking-normal font-sans transition-colors leading-relaxed">ตรวจวัดและปรับค่า EC 1.8–2.0 / pH 6.0</span>
 </a>
 </div>
-<a href="info.html?stage=2" class="text-[13.5px] text-cyan-300 hover:text-emerald-300 font-bold pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors" title="ดูรายละเอียดขั้นตอน"><span>วิธีทำ</span><span aria-hidden="true">↗</span></a>
+<a href="info.html?stage=2&tab=todo&task=stage2_task0" class="text-[13.5px] text-cyan-300 hover:text-emerald-300 font-bold pl-3 py-2 min-h-[44px] flex items-center gap-1 transition-colors" title="ดูรายละเอียดขั้นตอน"><span>วิธีทำ</span><span aria-hidden="true">↗</span></a>
 </div>
 </div>
 </section>
